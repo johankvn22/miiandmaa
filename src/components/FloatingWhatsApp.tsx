@@ -24,7 +24,7 @@ export const FloatingWhatsApp: React.FC = () => {
   ];
 
   const handleSendMessage = (msgText: string) => {
-    const url = `https://wa.me/6281288992345?text=${encodeURIComponent(msgText)}`;
+    const url = `https://wa.me/628112037714?text=${encodeURIComponent(msgText)}`;
     window.open(url, '_blank');
   };
 

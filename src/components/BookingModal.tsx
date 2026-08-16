@@ -57,7 +57,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
     );
 
     // Open WhatsApp
-    window.open(`https://wa.me/6281288992345?text=${formattedMessage}`, '_blank');
+    window.open(`https://wa.me/628112037714?text=${formattedMessage}`, '_blank');
     setIsSubmitted(true);
   };
 

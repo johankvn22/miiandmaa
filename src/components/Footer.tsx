@@ -189,7 +189,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                   On-Call 24 Jam Bidan & Doula
                 </div>
                 <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#FFFFFF', marginBottom: '8px' }}>
-                  0812-8899-2345
+                  0811-2037-714
                 </div>
                 <div style={{ fontSize: '0.78rem', color: 'rgba(255, 255, 255, 0.7)' }}>
                   Khusus bagi pasien terdaftar yang mengalami ketuban pecah dini atau tanda persalinan aktif.

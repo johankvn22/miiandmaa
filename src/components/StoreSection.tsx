@@ -16,7 +16,7 @@ export const StoreSection: React.FC = () => {
     const text = encodeURIComponent(
       `Halo Admin Toko Bidan Sehati 🌿\n\nSaya ingin memesan produk:\n📦 *${product.name}*\n💰 Harga: *${product.priceFormatted}*\n\nMohon info ketersediaan stok dan estimasi ongkir ke alamat saya. Terima kasih!`
     );
-    window.open(`https://wa.me/6281288992345?text=${text}`, '_blank');
+    window.open(`https://wa.me/628112037714?text=${text}`, '_blank');
   };
 
   return (
