@@ -2,7 +2,6 @@ import React from 'react';
 import { 
   MapPin, 
   Phone, 
-  Mail, 
   Clock, 
   ShieldCheck, 
   Sparkles
@@ -12,6 +11,14 @@ import { CLINIC_INFO, PRACTITIONER_DATA } from '../data/content';
 interface FooterProps {
   onOpenBooking: () => void;
 }
+
+const InstagramIcon = ({ size = 18, color = 'currentColor' }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
 
 export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
   return (
@@ -40,10 +47,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 mii and maa • Daily Homecare Terpercaya
               </span>
               <h2 style={{ color: '#FFFFFF', fontSize: 'clamp(1.8rem, 3vw, 2.3rem)', lineHeight: 1.25, marginBottom: '14px' }}>
-                Siap Menyambut Buah Hati dengan Tenang, Hangat & Berdaya?
+                Jasa Perawatan Mama dan Si Kecil Kapan Saja & Di Mana Saja
               </h2>
               <p style={{ color: 'rgba(255, 255, 255, 0.88)', fontSize: '1.02rem', lineHeight: 1.65 }}>
-                Hadirkan asuhan kebidanan terbaik langsung di kenyamanan rumah Anda. Jadwalkan kunjungan Daily Homecare atau kelas edukasi bersama tim bidan mii and maa sekarang.
+                Tanpa harus keluar rumah. Jadwalkan kunjungan Mom & Baby Spa, Breast Care, atau Pijat Nifas bersama tim bidan mii and maa sekarang (Daftar via WhatsApp H-1).
               </p>
             </div>
 
@@ -70,7 +77,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 }}
               >
                 <Phone size={18} />
-                <span>Chat Admin WhatsApp</span>
+                <span>Chat WhatsApp (0811-2037-714)</span>
               </a>
             </div>
           </div>
@@ -113,28 +120,28 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </div>
 
               <p style={{ fontSize: '0.88rem', color: 'rgba(255, 255, 255, 0.72)', lineHeight: 1.65, marginBottom: '20px' }}>
-                Pusat asuhan kebidanan holistik mandiri dan layanan daily homecare yang berfokus pada kenyamanan ibu hamil, persalinan tenang minim trauma, serta pemulihan nifas dan laktasi di rumah.
+                Pelayanan kesehatan ibu dan anak oleh Tim Bidan Berkompeten & Berpengalaman. Layanan Baby Spa, Pijat Hamil, Nifas, Laktasi, Kelas Parenting, dan Jasa Infus ke rumah.
               </p>
 
               <div style={{ fontSize: '0.82rem', color: 'var(--gold-accent)' }}>
-                {PRACTITIONER_DATA.licenseSTR}
+                Dipimpin oleh {PRACTITIONER_DATA.name}
               </div>
-              <div style={{ fontSize: '0.82rem', color: 'var(--gold-accent)' }}>
-                SIPB: {PRACTITIONER_DATA.licenseSIPB}
+              <div style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.7)', marginTop: '4px' }}>
+                📍 Bandung • Cimahi • KBB • Jabodetabek
               </div>
             </div>
 
-            {/* Column 2: Navigation Links (Home, Layanan Kami, Pricing, Artikel, About Us) */}
+            {/* Column 2: Navigation Links */}
             <div>
               <h4 style={{ color: '#FFFFFF', fontSize: '1.1rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
                 Navigasi Utama
               </h4>
               <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.94rem', color: 'rgba(255, 255, 255, 0.8)' }}>
                 <li><a href="#home" style={{ transition: 'color 0.2s' }}>Home</a></li>
-                <li><a href="#layanan" style={{ transition: 'color 0.2s' }}>Layanan Kami</a></li>
-                <li><a href="#pricing" style={{ transition: 'color 0.2s' }}>Pricing & Paket Biaya</a></li>
-                <li><a href="#artikel" style={{ transition: 'color 0.2s' }}>Artikel & Hospital Bag Checklist</a></li>
-                <li><a href="#about-us" style={{ transition: 'color 0.2s' }}>About Us & Profil Praktisi</a></li>
+                <li><a href="#layanan" style={{ transition: 'color 0.2s' }}>Layanan Mom & Baby Spa</a></li>
+                <li><a href="#pricing" style={{ transition: 'color 0.2s' }}>Paket Bundling Lebih Untung</a></li>
+                <li><a href="#artikel" style={{ transition: 'color 0.2s' }}>Artikel & Checklist Tas Persalinan</a></li>
+                <li><a href="#about-us" style={{ transition: 'color 0.2s' }}>About Us & Profil Tim Bidan</a></li>
               </ul>
             </div>
 
@@ -147,17 +154,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', fontSize: '0.88rem', color: 'rgba(255, 255, 255, 0.75)' }}>
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'start' }}>
                   <MapPin size={18} color="var(--plum-300)" style={{ flexShrink: 0, marginTop: '2px' }} />
-                  <span>{CLINIC_INFO.address} (Layanan Home Visit Jabodetabek)</span>
+                  <span>{CLINIC_INFO.coverageAreas}</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Phone size={18} color="var(--plum-300)" style={{ flexShrink: 0 }} />
-                  <span>{CLINIC_INFO.phone}</span>
+                  <span>{CLINIC_INFO.phone} (WhatsApp H-1)</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                  <Mail size={18} color="var(--plum-300)" style={{ flexShrink: 0 }} />
-                  <span>{CLINIC_INFO.email}</span>
+                  <InstagramIcon size={18} color="var(--plum-300)" />
+                  <a href={CLINIC_INFO.instagramUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255, 255, 255, 0.85)' }}>
+                    {CLINIC_INFO.instagram} (56.4K Followers)
+                  </a>
                 </div>
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'start' }}>
@@ -172,10 +181,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </div>
             </div>
 
-            {/* Column 4: Emergency Hotline & Trust Note */}
+            {/* Column 4: WhatsApp Hotline & Trust Note */}
             <div>
               <h4 style={{ color: '#FFFFFF', fontSize: '1.1rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
-                Panggilan Darurat Homecare
+                Reservasi Kunjungan Homecare
               </h4>
 
               <div style={{
@@ -186,19 +195,19 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                 marginBottom: '16px'
               }}>
                 <div style={{ fontSize: '0.8rem', color: 'var(--gold-accent)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '4px' }}>
-                  On-Call 24 Jam Bidan & Doula
+                  WhatsApp Resmi mii and maa
                 </div>
                 <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#FFFFFF', marginBottom: '8px' }}>
                   0811-2037-714
                 </div>
                 <div style={{ fontSize: '0.78rem', color: 'rgba(255, 255, 255, 0.7)' }}>
-                  Khusus bagi pasien terdaftar yang mengalami ketuban pecah dini atau tanda persalinan aktif.
+                  Daftar via WhatsApp H-1 untuk jadwal kunjungan bidan ke rumah Anda.
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'rgba(255, 255, 255, 0.6)' }}>
                 <ShieldCheck size={16} color="var(--plum-300)" />
-                <span>Terhubung dengan Jejaring RS Rujukan Maternal</span>
+                <span>Ditangani Bidan Berkompeten & Berpengalaman</span>
               </div>
             </div>
 
@@ -213,15 +222,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             lineHeight: 1.6
           }}>
             <p style={{ marginBottom: '12px' }}>
-              <strong>Disclaimer Medis:</strong> Informasi yang disajikan di situs web ini bertujuan untuk edukasi umum dan bukan merupakan pengganti diagnosis medis langsung, pemeriksaan USG formal, atau instruksi gawat darurat dari dokter spesialis obstetri & ginekologi (Sp.OG). Selalu konsultasikan kondisi kehamilan Anda dengan tenaga medis berlisensi resmi.
+              <strong>Disclaimer Medis:</strong> Informasi yang disajikan di situs web ini bertujuan untuk edukasi dan informasi layanan kesehatan ibu dan anak. Untuk penanganan kegawatdaruratan medis darurat, hubungi fasilitas kesehatan atau rumah sakit terdekat.
             </p>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                © {new Date().getFullYear()} mii and maa (DAILY HOMECARE - Praktik Mandiri Bidan Annisa Larasati). Hak Cipta Dilindungi.
+                © {new Date().getFullYear()} mii and maa Daily Homecare (Dipimpin oleh {PRACTITIONER_DATA.name}). Hak Cipta Dilindungi.
               </div>
               <div style={{ display: 'flex', gap: '16px' }}>
-                <a href="#home" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Kebijakan Privasi Medis</a>
-                <a href="#home" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Syarat & Ketentuan Layanan</a>
+                <a href={CLINIC_INFO.instagramUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>Instagram Resmi</a>
+                <a href={CLINIC_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>WhatsApp Resmi</a>
               </div>
             </div>
           </div>

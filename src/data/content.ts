@@ -1,17 +1,15 @@
 export interface ServiceItem {
   id: string;
   title: string;
-  category: 'class' | 'clinic' | 'doula';
+  category: 'baby' | 'mom' | 'medical';
   categoryLabel: string;
   tagline: string;
   duration: string;
-  mode: 'Offline & Online' | 'Klinik Fisik' | 'Homecare / RS' | 'Online Zoom';
-  price: string;
-  originalPrice?: string;
+  mode: string;
+  price?: string;
   badge?: string;
   benefits: string[];
   description: string;
-  schedule?: string;
   image: string;
 }
 
@@ -25,7 +23,6 @@ export interface PricingPackage {
   badge?: string;
   popular?: boolean;
   features: string[];
-  notIncluded?: string[];
   target: string;
 }
 
@@ -40,10 +37,12 @@ export interface PainPointItem {
 export interface BirthStory {
   id: string;
   motherName: string;
-  fatherName: string;
+  fatherName?: string;
   babyName: string;
-  birthType: string;
-  birthLocation: string;
+  birthType?: string;
+  birthLocation?: string;
+  location?: string;
+  serviceTaken?: string;
   quote: string;
   story: string;
   rating: number;
@@ -54,7 +53,7 @@ export interface BirthStory {
 export interface ArticleItem {
   id: string;
   title: string;
-  category: 'Kehamilan' | 'Persalinan Alami' | 'Laktasi' | 'Nutrisi' | 'Pasca Salin';
+  category: 'Baby Care' | 'Mom Care' | 'Laktasi' | 'Parenting';
   readTime: string;
   date: string;
   author: string;
@@ -87,497 +86,456 @@ export interface FAQItem {
 export const CLINIC_INFO = {
   brandName: 'mii and maa',
   tagline: 'DAILY HOMECARE',
-  subTagline: 'Daily Homecare & Holistic Gentle Birth Midwifery',
+  subTagline: 'Pelayanan Kesehatan Ibu dan Anak Ditangani oleh Tim Bidan Berkompeten & Berpengalaman',
   phone: '+62 811-2037-714',
   whatsappUrl: 'https://wa.me/628112037714',
+  instagram: '@miiandmaa.dailyhomecare',
+  instagramUrl: 'https://www.instagram.com/miiandmaa.dailyhomecare/',
   email: 'halo@miiandmaa.id',
-  address: 'Jl. Asri Harmoni No. 18, Kemang, Jakarta Selatan, 12560',
-  operatingHours: 'Senin - Sabtu: 08.00 - 20.00 WIB',
-  emergencyNote: 'Layanan Homecare, Pendampingan Persalinan & Darurat Buka 24/7',
+  address: 'Jl. Asri Harmoni No. 18, Bandung & Jabodetabek',
+  coverageAreas: 'Bandung, Cimahi, KBB (Kabupaten Bandung Barat), & Jabodetabek',
+  operatingHours: 'Senin - Minggu: 08.00 - 18.00 WIB (Reservasi H-1 via WA)',
+  emergencyNote: 'Layanan Home Visit Homecare Bidan Datang Langsung ke Rumah Anda',
   stats: [
-    { value: '1.450+', label: 'Ibu & Bayi Terlayani', sub: 'Homecare & Gentle Birth' },
-    { value: '14+', label: 'Tahun Pengalaman', sub: 'Lisensi Medis STR & SIPB Resmi' },
-    { value: '4.800+', label: 'Alumni Kelas Edukasi', sub: 'Online & Workshop Tatap Muka' },
-    { value: '99.4%', label: 'Tingkat Kepuasan', sub: 'Ulasan Kasih Ibu & Keluarga' }
+    { value: '56.4K+', label: 'Komunitas Mama di IG', sub: '@miiandmaa.dailyhomecare' },
+    { value: '1.690+', label: 'Postingan Edukasi & Asuhan', sub: 'Terbukti Bermanfaat untuk Ribuan Klien' },
+    { value: '4 Wilayah', label: 'Jangkauan Homecare', sub: 'Bandung, Cimahi, KBB & Jabodetabek' },
+    { value: '100%', label: 'Tenaga Bidan Ahli', sub: 'Bersertifikasi Resmi Mom & Baby Spa' }
   ]
 };
 
+export const PRACTITIONER_DATA = {
+  name: 'Bidan Sulastria TM',
+  shortName: 'Bidan Sulastria TM',
+  role: 'Founder mii and maa Daily Homecare & Praktisi Senior Mom-Baby Care',
+  title: 'Dipimpin langsung oleh Bidan Sulastria TM bersama tim bidan bersertifikasi khusus kesehatan ibu dan anak.',
+  bio: 'Mii and maa Daily Homecare dipimpin oleh Bidan Sulastria TM dan didukung oleh tim bidan yang berkompeten, berpengalaman, serta memiliki sertifikasi profesional di bidang Mom & Baby Spa, asuhan laktasi, dan perawatan nifas ke rumah.',
+  philosophy: 'Perawatan mama dan si kecil kapan saja dan di mana saja tanpa harus repot keluar rumah. Kami hadir dengan sentuhan penuh kasih, higienis, dan standar medis kebidanan terbaik.',
+  licenseSTR: 'STR Bidan Kemenkes Aktif',
+  licenseSIPB: 'SIPB Praktik Bidan Resmi',
+  certifications: [
+    'Sertifikasi Resmi Mom & Baby Spa Specialist',
+    'Sertifikasi Pijat Pediatric & Penanganan Kolik/Kembung Bayi',
+    'Certified Lactation & Breast Care Specialist (Pijat Oksitosin)',
+    'Pelayanan Kebidanan Profesional Berlisensi Resmi (STR Bidan Aktif)',
+    'Tersedia Tim Bidan Siaga di Bandung Raya & Jabodetabek'
+  ],
+  books: [
+    {
+      title: 'Panduan Asuhan Ibu & Bayi di Rumah',
+      publisher: 'Pustaka mii and maa',
+      year: '2025',
+      badge: 'Buku Pegangan Mama'
+    }
+  ],
+  mediaFeatures: [
+    'Instagram: @miiandmaa.dailyhomecare (56.4K Followers)',
+    'Komunitas Ibu & Bayi Bandung Raya & Jabodetabek'
+  ]
+};
+
+export const SERVICES_DATA: ServiceItem[] = [
+  {
+    id: 'breast-care-laktasi',
+    title: 'Breast Care (Pijat Laktasi & Pijat Oksitosin)',
+    category: 'mom',
+    categoryLabel: 'Perawatan Ibu Menyusui',
+    tagline: 'Perawatan payudara lembut untuk melancarkan ASI, atasi payudara bengkak/sumbatan, dan cegah mastitis.',
+    duration: '60 - 90 Menit / Kunjungan',
+    mode: 'Layanan ke Rumah (Homecare)',
+    price: 'Konsultasi via WA',
+    badge: 'Best Seller Mom 🌸',
+    benefits: [
+      'Pijat laktasi lembut untuk membuka sumbatan saluran ASI',
+      'Pijat stimulasi hormon oksitosin di tulang belakang untuk memicu aliran ASI deras',
+      'Kompres terapeutik & evaluasi pelekatan mulut bayi (latch-on)',
+      'Relaksasi otot bahu, leher, dan punggung atas ibu menyusui',
+      'Konseling manajemen ASI perah & nutrisi pelancar ASI'
+    ],
+    description: 'Sangat direkomendasikan untuk ibu baru pasca melahirkan yang mengalami ASI seret, payudara mengeras, atau puting lecet. Bidan kami hadir membantu langsung di rumah Anda.',
+    image: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'baby-kids-massage',
+    title: 'Baby & Kids Massage (Pijat Bayi & Balita)',
+    category: 'baby',
+    categoryLabel: 'Perawatan Bayi & Anak',
+    tagline: 'Merilekskan otot, merangsang stimulasi tumbuh kembang, dan meningkatkan kualitas tidur si kecil.',
+    duration: '45 - 60 Menit',
+    mode: 'Layanan ke Rumah (Homecare)',
+    price: 'Konsultasi via WA',
+    badge: 'Favorit Si Kecil 👶',
+    benefits: [
+      'Pijat tubuh lembut dengan minyak alami organik aman untuk kulit sensitif',
+      'Membantu bayi tidur lebih lelap dan tidak mudah rewel di malam hari',
+      'Stimulasi sensori-motorik & kelenturan otot fase tengkurap/merangkak',
+      'Meningkatkan nafsu makan dan memperlancar sirkulasi darah',
+      'Ditangani langsung oleh bidan ahli tersertifikasi baby spa'
+    ],
+    description: 'Pijat relaksasi yang disesuaikan dengan usia bayi (newborn hingga balita). Membantu menjaga kebugaran tubuh si kecil agar tumbuh kembangnya optimal.',
+    image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'pijat-pediatric-kolik',
+    title: 'Pijat Pediatric Khusus Bayi Rewel / Kembung & Kolik',
+    category: 'baby',
+    categoryLabel: 'Perawatan Bayi Khusus',
+    tagline: 'Penanganan khusus untuk mengeluarkan gas terjebak di perut, redakan perut kembung & atasi kolik.',
+    duration: '45 - 60 Menit',
+    mode: 'Layanan ke Rumah (Homecare)',
+    price: 'Konsultasi via WA',
+    badge: 'Solusi Bayi Rewel 🩺',
+    benefits: [
+      'Teknik pijat perut khusus I Love You (ILU) & gerakan kayuh sepeda',
+      'Membantu mengeluarkan gas penyebab kembung dan begah pada bayi',
+      'Menenangkan tangisan kolik yang berkepanjangan di sore/malam hari',
+      'Membantu mengatasi bayi susah BAB atau sembelit',
+      'Edukasi cara sendawakan bayi yang benar untuk orang tua'
+    ],
+    description: 'Teknik pijat pediatric klinis yang terbukti ampuh meredakan ketidaknyamanan saluran cerna bayi sehingga bayi kembali tenang dan ceria.',
+    image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'postnatal-massage-nifas',
+    title: 'Pijat Nifas (Postnatal Massage & Pemulihan Ibu)',
+    category: 'mom',
+    categoryLabel: 'Perawatan Ibu Pasca Melahirkan',
+    tagline: 'Memulihkan stamina tubuh, mengurangi pegal pascapersalinan, dan mempercepat pemulihan rahim.',
+    duration: '90 - 120 Menit',
+    mode: 'Layanan ke Rumah (Homecare)',
+    price: 'Konsultasi via WA',
+    badge: 'Pemulihan Cepat ✨',
+    benefits: [
+      'Pijat seluruh tubuh relaksasi untuk meredakan nyeri otot paska bersalin',
+      'Bantu mempercepat involusi rahim (pengembalian ukuran rahim ke semula)',
+      'Pemasangan bengkung/stagen modern untuk merapatkan perut',
+      'Perawatan rempah herbal tapel/pilis penenang kepala dan mata lelah',
+      'Mencegah stres dan kelelahan mental (postpartum blues)'
+    ],
+    description: 'Asuhan nifas paripurna di rumah tanpa Anda harus keluar kamar. Mengembalikan kesegaran dan kebugaran ibu agar siap merawat buah hati tercinta.',
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'pregnancy-massage-hamil',
+    title: 'Pijat Hamil (Pregnancy Massage Relaksasi)',
+    category: 'mom',
+    categoryLabel: 'Perawatan Ibu Hamil',
+    tagline: 'Meringankan pegal pinggang, ketegangan otot panggul, dan memberikan ketenangan bumil.',
+    duration: '60 - 90 Menit',
+    mode: 'Layanan ke Rumah (Homecare)',
+    price: 'Konsultasi via WA',
+    badge: 'Aman untuk Trimester 2 & 3 🤰',
+    benefits: [
+      'Posisi pijat miring (side-lying) yang sangat aman dan nyaman untuk janin',
+      'Meredakan kram betis, pegal punggung bawah, dan pembengkakan kaki',
+      'Mengurangi hormon stres dan meningkatkan kualitas tidur ibu hamil',
+      'Membantu merilekskan otot-otot panggul menjelang hari persalinan',
+      'Dilakukan dengan teknik lembut khusus kebidanan'
+    ],
+    description: 'Terapi relaksasi khusus bagi ibu hamil mulai usia kehamilan 16 minggu ke atas untuk menjaga tubuh tetap bugar dan pikiran tetap rileks.',
+    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'tindik-cukur-newborn',
+    title: 'Tindik Telinga Bayi & Potong Rambut (Gunting Rambut Newborn)',
+    category: 'baby',
+    categoryLabel: 'Perawatan Estetika & Kebersihan Bayi',
+    tagline: 'Tindik telinga steril minim rasa sakit dan potong rambut bayi higienis di rumah.',
+    duration: '30 - 45 Menit',
+    mode: 'Layanan ke Rumah (Homecare)',
+    price: 'Konsultasi via WA',
+    badge: 'Higienis & Steril 🎀',
+    benefits: [
+      'Tindik telinga menggunakan jarum medis steril sekali pakai anti-infeksi',
+      'Proses cepat, tepat titik anatomis, dan minim trauma pada bayi perempuan',
+      'Potong rambut/cukur gundul newborn higienis dengan pisau steril baru',
+      'Edukasi perawatan daun telinga pasca tindik agar cepat kering',
+      'Dikerjakan langsung oleh bidan berpengalaman dengan tangan terampil'
+    ],
+    description: 'Layanan kebersihan dan estetika bayi yang praktis di rumah Anda, menjaga bayi tetap tenang tanpa rasa cemas ke klinik ramai.',
+    image: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'jasa-infus-medis',
+    title: 'Jasa Infus Medis & Penunjang Kesehatan ke Rumah',
+    category: 'medical',
+    categoryLabel: 'Layanan Medis ke Rumah',
+    tagline: 'Layanan pemasangan infus vitamin / hidrasi medis langsung di rumah oleh tenaga kesehatan.',
+    duration: 'Sesuai Kebutuhan',
+    mode: 'Layanan Medis Home Visit',
+    price: 'Konsultasi via WA',
+    badge: 'Tenaga Medis Siaga 💉',
+    benefits: [
+      'Pemasangan infus dengan standar SOP medis rumah sakit & alat steril',
+      'Terapi cairan hidrasi untuk pemulihan pasca sakit / kelelahan ekstrem',
+      'Pemberian vitamin booster sesuai anjuran medis',
+      'Pemantauan tanda-tanda vital (tensi, nadi, saturasi oksigen) oleh bidan/perawat',
+      'Sangat nyaman tanpa harus antre di fasilitas kesehatan'
+    ],
+    description: 'Layanan penunjang kesehatan terpercaya bagi keluarga yang membutuhkan asuhan medis di rumah dengan pantauan tenaga kesehatan berkompeten.',
+    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'kelas-parenting-edukasi',
+    title: 'Kelas Edukasi Parenting & Perawatan Bayi Baru Lahir',
+    category: 'medical',
+    categoryLabel: 'Edukasi Orang Tua Baru',
+    tagline: 'Sesi privat edukasi tumbuh kembang anak, praktik memandikan bayi, dan perawatan tali pusat.',
+    duration: '60 - 90 Menit',
+    mode: 'Offline Home Visit / Online',
+    price: 'Konsultasi via WA',
+    badge: 'Wajib untuk New Mom & Dad 📚',
+    benefits: [
+      'Panduan praktik memandikan bayi baru lahir tanpa rasa takut licin',
+      'Teknik perawatan tali pusat kering & bersih anti-infeksi',
+      'Edukasi tanda bahaya bayi baru lahir & milestone tumbuh kembang',
+      'Manajemen jadwal tidur bayi & stimulasi sensori sejak dini',
+      'Sesi tanya jawab terbuka dan leluasa bersama bidan'
+    ],
+    description: 'Mempersiapkan ayah dan ibu baru agar percaya diri dan kompak merawat si kecil di hari-hari pertama kelahiran.',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80'
+  }
+];
+
 export const PRICING_PACKAGES: PricingPackage[] = [
   {
-    id: 'single-homecare',
-    name: 'Paket Single Visit',
-    tagline: 'Kunjungan tunggal untuk penanganan masalah laktasi dan evaluasi nifas.',
-    price: 'Rp 450.000',
-    period: '/ 1x Kunjungan (90 Menit)',
-    target: 'Cocok untuk ibu yang butuh pertolongan cepat payudara bengkak atau rawat tali pusat.',
-    features: [
-      '1x Kunjungan Bidan Profesional ke Rumah (90 Menit)',
-      'Pijat Laktasi Lembut & Terapi Payudara Bengkak',
-      'Edukasi Pelekatan Mulut Bayi (Latch-on) Anti Lecet',
-      'Pemeriksaan Tali Pusat Steril & Skrining Ikterus (Kuning)',
-      'Evaluasi Pemulihan Luka Jahitan Perineum / Operasi SC',
-      'Konsultasi Gratis via WhatsApp selama 3 Hari'
-    ]
-  },
-  {
-    id: 'nifas-sehati-3x',
-    name: 'Paket Nifas Sehati (3x Visit)',
-    tagline: 'Pendampingan intensif masa awal nifas agar transisi menyusui lancar bebas stres.',
-    price: 'Rp 1.250.000',
-    originalPrice: 'Rp 1.350.000',
+    id: 'bundling-3-hari',
+    name: 'Paket Bundling 3 Hari (Newborn & Mom Care)',
+    tagline: 'Perawatan intensif pasca pulang dari RS untuk kenyamanan mama dan si kecil.',
+    price: 'Paket Hemat 3 Hari',
     period: '/ 3x Kunjungan Homecare',
-    badge: 'Paling Populer ⭐',
+    badge: 'Paling Diminati ⭐',
     popular: true,
-    target: 'Paling direkomendasikan untuk ibu baru pada minggu pertama kepulangan dari RS.',
+    target: 'Sangat cocok untuk ibu baru pada minggu pertama pasca melahirkan.',
     features: [
-      '3x Kunjungan Homecare (Jadwal Fleksibel sesuai Kebutuhan)',
-      'Pijat Laktasi & Terapi Oksitosin di Setiap Kunjungan',
-      'Mandi Rempah Herbal Nifas & Pemasangan Bengkung Modern',
-      'Pijat Relaksasi Tubuh Ibu untuk Mencegah Postpartum Blues',
-      'Pijat Bayi Lembut (Infant Massage) Anti Kolik & Kembung',
-      'Pendampingan Praktik Memandikan Bayi Baru Lahir bagi Orang Tua',
-      'Konsultasi Privat WhatsApp 24/7 Selama Masa Nifas'
+      '3x Kunjungan Homecare Bidan Langsung ke Rumah',
+      'Kombinasi Breast Care (Pijat Laktasi & Oksitosin) di Tiap Kunjungan',
+      'Pijat Nifas (Postnatal Massage) Relaksasi Tubuh Mama',
+      'Pijat Bayi Lembut (Baby Massage) & Stimulasi Tumbuh Kembang',
+      'Perawatan Tali Pusat Steril & Praktik Memandikan Bayi',
+      'FREE Konsultasi via WhatsApp Selama Masa Perawatan'
     ]
   },
   {
-    id: 'golden-40-days',
-    name: 'Paket Golden 40 Days',
-    tagline: 'Perawatan holistik menyeluruh selama 40 hari masa pemulihan nifas ibu & tumbuh kembang bayi.',
-    price: 'Rp 2.800.000',
-    originalPrice: 'Rp 3.150.000',
-    period: '/ 7x Kunjungan Terjadwal',
-    badge: 'Paket Komprehensif ✨',
-    target: 'Asuhan paripurna dari minggu pertama hingga selesai masa nifas.',
+    id: 'bundling-5-hari',
+    name: 'Paket Bundling 5 Hari (Golden Recovery)',
+    tagline: 'Pendampingan komprehensif hingga ASI lancar dan luka nifas membaik.',
+    price: 'Paket Hemat 5 Hari',
+    period: '/ 5x Kunjungan Homecare',
+    badge: 'Hemat & Lengkap ✨',
+    target: 'Direkomendasikan untuk pemulihan optimal persalinan normal maupun SC.',
     features: [
-      '7x Kunjungan Homecare Terjadwal (H+1, H+3, H+7, H+14, H+21, H+30, H+40)',
-      'Perawatan Lengkap Pemulihan Rahim & Otot Panggul',
-      'Pendampingan ASI Eksklusif hingga Produksi Stabil & Lancar',
-      'Spa Bayi & Hydrotherapy Air Hangat Steril di Rumah',
-      'Stimulasi Sensori-Motorik & Senam Tumbuh Kembang Bayi',
-      'Bonus 1 Botol Minyak Pijat Almond Organik mii and maa (100ml)',
-      'Akses Prioritas Darurat Bidan 24 Jam'
+      '5x Kunjungan Homecare Bidan Terjadwal di Rumah',
+      'Full Breast Care Treatment (Atasi Payudara Bengkak & Lancarkan ASI)',
+      'Pijat Nifas + Pemasangan Bengkung Modern & Tapel Herbal',
+      'Pijat Pediatric Bayi (Pencegahan Kolik & Perut Kembung)',
+      'Tindik Telinga Bayi / Potong Rambut Newborn (Opsional Termasuk)',
+      'Bonus Pijat Relaksasi Wajah & Kepala untuk Mama'
     ]
   },
   {
-    id: 'doula-persalinan',
-    name: 'Paket Doula & Gentle Birth',
-    tagline: 'Pendampingan persalinan personal tanpa panik sejak fase aktif kontraksi hingga IMD.',
-    price: 'Rp 3.500.000',
-    period: '/ Pendampingan Persalinan Penuh',
-    badge: 'Slot Terbatas 💖',
-    target: 'Untuk pasangan yang menginginkan persalinan minim trauma di RS/Klinik pilihan.',
+    id: 'bundling-7-hari',
+    name: 'Paket Bundling 7 Hari (Paripurna Mama & Si Kecil)',
+    tagline: 'Asuhan lengkap harian di rumah tanpa repot keluar kamar sama sekali.',
+    price: 'Paket Super Hemat 7 Hari',
+    period: '/ 7x Kunjungan Homecare',
+    badge: 'Perawatan Paripurna 👑',
+    target: 'Pilihan terbaik untuk mama yang ingin didampingi penuh selama 1-2 minggu pertama.',
     features: [
-      '2x Kunjungan Prenatal Persiapan Fisik & Mental di Rumah',
-      'Penyusunan Lembar Rencana Persalinan (Birth Plan) Medis',
-      'Kesiagaan On-Call Bidan/Doula 24 Jam mulai Usia Kehamilan 37 Minggu',
-      'Pendampingan Fisik Langsung di RS (Pijat Counter-Pressure, Rebozo, Afirmasi)',
-      'Memandu Pasangan agar Menjadi Pelindung Terbaik bagi Ibu',
-      '1x Kunjungan Nifas & Evaluasi Laktasi Pasca Pulang ke Rumah'
+      '7x Kunjungan Homecare Lengkap Mama & Bayi',
+      'Pendampingan ASI Eksklusif Tuntas & Terapi Oksitosin Harian',
+      'Pijat Postnatal + Bengkung + Perawatan Luka Pemulihan',
+      'Baby Spa & Pijat Stimulasi Sensori Motorik Si Kecil',
+      'Sesi Privat Kelas Parenting & Perawatan Bayi untuk Ayah-Bunda',
+      'Prioritas Booking Jadwal & Fast Response Konsultasi WA'
+    ]
+  },
+  {
+    id: 'single-visit-treatment',
+    name: 'Paket Single Visit (Perawatan Satuan)',
+    tagline: 'Pilihan perawatan satuan sesuai keluhan mama atau si kecil kapan saja dibutuhkan.',
+    price: 'Kunjungan Satuan',
+    period: '/ 1x Kunjungan (60-90 Menit)',
+    badge: 'Fleksibel 🌿',
+    target: 'Cocok untuk penanganan darurat payudara bengkak, bayi kembung rewel, atau pijat hamil.',
+    features: [
+      '1x Kunjungan Bidan Profesional ke Rumah',
+      'Bebas Pilih: Breast Care / Pijat Hamil / Pijat Nifas / Baby Massage',
+      'Menggunakan Bahan & Minyak Alami Berkualitas Steril',
+      'Evaluasi Kondisi Kesehatan Mama & Si Kecil',
+      'Daftar via WhatsApp H-1'
     ]
   }
 ];
 
 export const PAIN_POINTS: PainPointItem[] = [
   {
-    icon: 'BrainCircuit',
-    fear: 'Ketakutan & Cemas Berlebih terhadap Rasa Sakit',
-    fearDesc: 'Banyak calon ibu merasa ngeri mendengar cerita kontraksi yang digambarkan begitu menyiksa dan tanpa kendali.',
-    solution: 'Filosofi Hypnobirthing & Relaksasi Gelombang',
-    solutionDesc: 'Kami mengajarkan bahwa rasa mulas adalah gelombang alami rahim yang membuka jalan lahir. Dengan teknik napas dan sugesti tenang, tubuh melepas endorfin yang meredakan sensasi tersebut secara alami.'
-  },
-  {
-    icon: 'FileText',
-    fear: 'Minim Pengetahuan Seputar Intervensi Medis',
-    fearDesc: 'Bingung saat dihadapkan pada opsi induksi, suntik oksitosin, atau episiotomi (pengguntingan perineum) tanpa tahu opsi alternatifnya.',
-    solution: 'Penyusunan Birth Plan Berbasis Bukti Medis',
-    solutionDesc: 'Kami membantu Anda menyusun Rencana Persalinan (Birth Plan) yang jelas, memahami indikasi medis yang sesungguhnya, serta melatih komunikasi asertif dan penuh rasa hormat dengan dokter kandungan.'
-  },
-  {
     icon: 'HeartHandshake',
-    fear: 'Ayah / Pasangan Bingung Harus Berbuat Apa',
-    fearDesc: 'Seringkali suami hanya menjadi penonton yang cemas di ruang bersalin karena tidak dibekali keterampilan praktis mendampingi istri.',
-    solution: 'Pelatihan Praktis Peran "Birth Partner"',
-    solutionDesc: 'Di mii and maa, suami dilatih teknik counter-pressure pinggang, pijat panggul, penggunaan kain Rebozo, dan kata-kata afirmasi agar menjadi pelindung terbaik istri saat melahirkan.'
+    fear: 'Kelelahan & Pegal Luar Biasa Pasca Melahirkan',
+    fearDesc: 'Tubuh terasa lelah dan nyeri setelah bersalin sementara harus merawat bayi baru lahir setiap 2 jam.',
+    solution: 'Pijat Nifas & Perawatan Pemulihan di Rumah',
+    solutionDesc: 'Bidan kami hadir memberikan pijatan relaksasi nifas, bengkung, dan asuhan tubuh tanpa mama harus keluar rumah.'
   },
   {
     icon: 'Milk',
-    fear: 'Stres ASI Seret & Nifas yang Melelahkan',
-    fearDesc: 'Bingung mengatasi payudara bengkak, puting lecet berdarah, dan kelelahan mental merawat bayi baru lahir sendirian.',
-    solution: 'Pendampingan Laktasi Intensif & Daily Homecare',
-    solutionDesc: 'Bidan bersertifikasi konselor menyusui mendampingi Anda langsung di rumah, memastikan perlekatan yang nyaman, serta memulihkan stamina ibu melalui asuhan nifas holistik.'
-  }
-];
-
-export const PRACTITIONER_DATA = {
-  name: 'Bidan Annisa Larasati, S.Tr.Keb, Bdn, C.Ht, CPM',
-  shortName: 'Bidan Annisa',
-  role: 'Founder mii and maa & Senior Holistic Midwife',
-  licenseSTR: 'STR.32.01.2.2.1.2023.004189',
-  licenseSIPB: '503/014/SIPB-DS/DINKES/2023',
-  experienceYears: 14,
-  bio: 'Berpengalaman lebih dari 14 tahun sebagai bidan klinis dan praktisi homecare kebidanan holistik. Melalui mii and maa Daily Homecare, Bidan Annisa mendedikasikan hidupnya untuk menghadirkan perawatan ibu dan bayi yang penuh kasih, menenangkan, aman secara medis, serta memberdayakan keluarga di rumah.',
-  philosophy: 'Melahirkan dan merawat bayi baru lahir adalah momen sakral keluarga. Bersama mii and maa Daily Homecare, kami hadir mendampingi ibu dan si kecil dengan asuhan yang lembut, memeluk dengan empati, dan menjaga keselamatan medis dengan standar tertinggi.',
-  certifications: [
-    'Certified Hypnobirthing Practitioner (HypnoBirthing Institute USA)',
-    'Spinning Babies® & Pelvic Balance Certified Specialist (Australia)',
-    'Certified Lactation Counselor (CLC Indonesia)',
-    'Certified Infant Massage & Baby Spa Instructor (IAIM)',
-    'Akupresur Kebidanan & Terapi Moksibusi untuk Janin Sungsang',
-    'Anggota Aktif Ikatan Bidan Indonesia (IBI) & Indonesian Doula Association'
-  ],
-  books: [
-    {
-      title: 'Lahir dengan Senyuman: Seni Melahirkan Tanpa Rasa Takut',
-      publisher: 'Gramedia Pustaka Utama (Cetakan ke-7)',
-      year: '2024',
-      badge: 'National Bestseller'
-    },
-    {
-      title: 'Buku Saku Ayah Siaga: Panduan Lengkap Menemani Hamil & Melahirkan',
-      publisher: 'Pustaka Sehati',
-      year: '2025',
-      badge: 'Favorit Komunitas'
-    }
-  ],
-  mediaFeatures: [
-    'Kompas TV - Inspirasi Indonesia: "Revolusi Homecare & Persalinan Nyaman"',
-    'DetikHealth: "Mengenal Layanan Gentle Birth & Homecare mii and maa"',
-    'Mother & Beyond Magazine: "Pakar Laktasi & Pendampingan Nifas Terbaik"',
-    'Liputan6: "Tips Perawatan Bayi Baru Lahir & Nifas di Rumah"'
-  ]
-};
-
-export const SERVICES_DATA: ServiceItem[] = [
-  {
-    id: 'postpartum-homecare',
-    title: 'Mom & Baby Postpartum Care & Pijat Laktasi (Daily Homecare)',
-    category: 'clinic',
-    categoryLabel: 'Daily Homecare Layanan Utama',
-    tagline: 'Perawatan nifas terpadu di rumah Anda: atasi ASI tersumbat, rawat tali pusat, dan pulihkan stamina ibu.',
-    duration: '90 Menit / Kunjungan',
-    mode: 'Homecare / RS',
-    price: 'Konsultasi Sekarang',
-    badge: 'Paling Diminati 🐘',
-    benefits: [
-      'Pijat payudara laktasi lembut untuk mengatasi payudara bengkak / mastitis',
-      'Edukasi pelekatan mulut bayi (latch on) yang benar anti lecet',
-      'Perawatan tali pusat steril & evaluasi luka jahitan perineum/SC',
-      'Mandi rempah herbal nifas & bengkung/stagen modern',
-      'Skrining depresi pasca salin (postpartum blues)'
-    ],
-    description: 'Bidan profesional mii and maa hadir langsung ke rumah Anda memberikan perawatan fisik dan emosional pasca melahirkan. Ibu dapat beristirahat nyaman sementara kami membantu transisi menyusui dan perawatan si kecil.',
-    schedule: 'Setiap Hari: 08.00 - 17.00 WIB (Area Jabodetabek)',
-    image: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'gentle-birth-class',
-    title: 'Kelas Persiapan Gentle Birth & Birth Partner',
-    category: 'class',
-    categoryLabel: 'Kelas & Workshop Edukasi',
-    tagline: 'Bekali diri dan pasangan untuk persalinan yang terencana, tenang, dan memberdayakan.',
-    duration: '2 Hari (Total 6 Jam)',
-    mode: 'Offline & Online',
-    price: 'Konsultasi Sekarang',
-    badge: 'Workshop Terfavorit ⭐',
-    benefits: [
-      'Pemahaman fisiologi kontraksi & gelombang rahim tanpa panik',
-      'Pelatihan teknik counter-pressure & pijat endorfin untuk suami',
-      'Penyusunan Lembar Rencana Persalinan (Birth Plan) resmi',
-      'Simulasi posisi persalinan tegak & optimalisasi panggul',
-      'Modul fisik eksklusif mii and maa & akses grup konsultasi privat'
-    ],
-    description: 'Workshop komprehensif yang dirancang untuk calon ibu dan pasangannya. Mengupas tuntas cara kerja hormon persalinan, manajemen rasa tidak nyaman alami, serta teknik komunikasi asertif dengan dokter atau rumah sakit.',
-    schedule: 'Setiap Sabtu & Minggu (Tersedia batch tatap muka di klinik & sesi Zoom privat)',
-    image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'hypnobirthing-yoga',
-    title: 'Hypnobirthing & Prenatal Gentle Yoga',
-    category: 'class',
-    categoryLabel: 'Kelas & Workshop Edukasi',
-    tagline: 'Pelepasan ketakutan batin, pemulihan fleksibilitas panggul, dan koneksi batin ibu-janin.',
-    duration: '75 Menit / Sesi',
-    mode: 'Offline & Online',
-    price: 'Konsultasi Sekarang',
-    badge: 'Rutin Setiap Pekan',
-    benefits: [
-      'Afirmasi positif bawah sadar untuk melenyapkan rasa takut',
-      'Gerakan yoga aman trimester 2 & 3 untuk membuka pintu panggul',
-      'Teknik napas tiup-tiup (up-breathing & down-breathing)',
-      'Optimalisasi posisi janin (mengatasi kepala belum masuk panggul)',
-      'Free audio relaksasi mandiri format MP3 berdurasi 30 menit'
-    ],
-    description: 'Kombinasi latihan fisik ringan yang disesuaikan dengan anatomi ibu hamil bersama sugesti relaksasi hipnosis medis. Membantu menyeimbangkan ligamen rahim dan memicu pelepasan hormon cinta (oksitosin).',
-    schedule: 'Selasa & Kamis: 16.00 WIB | Sabtu: 09.00 WIB',
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'anc-holistic-clinic',
-    title: 'Pemeriksaan ANC Holistik & Konsultasi USG Bidan',
-    category: 'clinic',
-    categoryLabel: 'Layanan Klinik & Home Visit',
-    tagline: 'Pemeriksaan kehamilan humanis 45-60 menit tanpa terburu-buru, penuh ruang diskusi.',
-    duration: '45 - 60 Menit',
-    mode: 'Klinik Fisik',
-    price: 'Konsultasi Sekarang',
-    badge: 'Pemeriksaan Humanis',
-    benefits: [
-      'Pemeriksaan Leopold lengkap, tinggi fundus, dan detak jantung janin (Doppler)',
-      'Konsultasi USG 2D/3D untuk konfirmasi posisi plasenta & cairan ketuban',
-      'Pemeriksaan laboratorium sederhana (Hb, urin reduksi & protein)',
-      'Konseling nutrisi berbasis pangan lokal & rempah alami ramah hamil',
-      'Ruang periksa estetik, privat, dengan aromaterapi menenangkan'
-    ],
-    description: 'Sesi pemeriksaan antenatal care (ANC) yang hangat. Kami meluangkan waktu mendengarkan seluruh keluh kesah Anda, mengecek kondisi fisik secara menyeluruh, dan memberikan edukasi personal.',
-    schedule: 'Senin - Sabtu: 09.00 - 18.00 WIB (Dengan Janji Temu)',
-    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'doula-support',
-    title: 'Doula & Pendampingan Persalinan Privat 24/7',
-    category: 'doula',
-    categoryLabel: 'Pendampingan Privat / Doula',
-    tagline: 'Pendampingan berkelanjutan sejak masa aktif kontraksi hingga inisiasi menyusu dini.',
-    duration: 'On-Call 24 Jam sejak UK 37 Minggu',
-    mode: 'Homecare / RS',
-    price: 'Konsultasi Sekarang',
-    badge: 'Slot Terbatas (3 Pasien/Bulan)',
-    benefits: [
-      'Kesiagaan on-call 24 jam mulai usia kehamilan 37 minggu',
-      '2x kunjungan persiapan prenatal di rumah sebelum HPL',
-      'Pendampingan fisik langsung di RS/Klinik pilihan (pijat, Rebozo, hydrotherapy)',
-      'Menjaga suasana ruang bersalin tetap tenang dan damai',
-      '1x kunjungan nifas evaluasi laktasi pasca pulang ke rumah'
-    ],
-    description: 'Layanan doula profesional yang berfokus pada kenyamanan ibu dan memberdayakan ayah. Kami menjadi jembatan komunikasi dan pendamping fisik tanpa menggantikan wewenang medis dokter/bidan utama.',
-    schedule: 'Booking minimal 2 bulan sebelum HPL',
-    image: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'baby-spa-massage',
-    title: 'Spa & Pijat Stimulasi Tumbuh Kembang Bayi (Home Visit / Klinik)',
-    category: 'clinic',
-    categoryLabel: 'Daily Homecare & Klinik',
-    tagline: 'Stimulasi sensori-motorik, redakan kolik perut, dan tingkatkan kualitas tidur bayi.',
-    duration: '60 Menit',
-    mode: 'Homecare / RS',
-    price: 'Konsultasi Sekarang',
-    benefits: [
-      'Pijat tubuh bayi lembut dengan minyak alami organik (food grade)',
-      'Terapi senam bayi (baby gym) untuk koordinasi motorik kasar',
-      'Hydrotherapy / renang air hangat steril dengan pelampung leher aman',
-      'Teknik pijat khusus I Love U (ILU) untuk mengatasi kembung & susah BAB',
-      'Ruang higienis bertema alam ramah anak'
-    ],
-    description: 'Terapi relaksasi khusus bayi usia 1 bulan hingga 2 tahun yang ditangani langsung oleh bidan terlatih bersertifikasi International Association of Infant Massage (IAIM).',
-    schedule: 'Senin - Minggu: 09.00 - 17.00 WIB',
-    image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80'
-  }
-];
-
-export const BIRTH_STORIES: BirthStory[] = [
-  {
-    id: 'story-1',
-    motherName: 'dr. Pratiwi Rahmadani',
-    fatherName: 'Dimas Wicaksono',
-    babyName: 'Kalandra Bumi (3.4 kg, 50 cm)',
-    birthType: 'Persalinan Alami Tanpa Jahitan (Intact Perineum)',
-    birthLocation: 'RS Permata Bunda & Pendampingan mii and maa',
-    quote: 'Saya sempat trauma karena riwayat keguguran sebelumnya. Bersama mii and maa dan Bidan Annisa, saya belajar melepaskan rasa takut dan percaya pada tubuh saya sendiri.',
-    story: 'Saat pembukaan 6 hingga 10, saya tidak panik sama sekali. Teknik napas tiup-tiup yang diajarkan di kelas prenatal yoga benar-benar bekerja ajaib. Suami sigap memijat panggul saya dengan teknik counter-pressure. Alhamdulillah, Bumi lahir dengan tenang tanpa robekan perineum!',
-    rating: 5,
-    image: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=600&q=80',
-    highlight: 'Lahir Alami Tanpa Episiotomi'
-  },
-  {
-    id: 'story-2',
-    motherName: 'Nadia Salsabila',
-    fatherName: 'Reza Pratama',
-    babyName: 'Ayana Kirana (3.1 kg, 49 cm)',
-    birthType: 'VBAC Sukses (Vaginal Birth After Cesarean)',
-    birthLocation: 'Klinik Bersalin Kolaborasi Dokter-Bidan',
-    quote: 'Anak pertama saya dioperasi caesar karena panik. Untuk anak kedua, saya bertekad mencari pendamping yang mau mendukung VBAC secara aman bersama tim mii and maa.',
-    story: 'Bidan Annisa membantu saya mengevaluasi riwayat medis, mengoptimalkan posisi panggul dengan teknik Spinning Babies, dan menyusun birth plan yang matang. Persalinan kedua saya berjalan 7 jam saja dan saya bisa langsung IMD sambil memeluk Ayana.',
-    rating: 5,
-    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
-    highlight: 'Sukses VBAC Minim Trauma'
-  },
-  {
-    id: 'story-3',
-    motherName: 'Citra Kirana Wardhana',
-    fatherName: 'Bagas Aditya',
-    babyName: 'Malik Danendra (3.2 kg, 48 cm)',
-    birthType: 'Gentle Home Visit & Water Birth',
-    birthLocation: 'Pendampingan Bidan mii and maa',
-    quote: 'Layanan homecare mii and maa paska salin membuat hari-hari pertama saya sebagai new mom begitu tenang dan bebas dari baby blues.',
-    story: 'Pijat laktasi di rumah membantu ASI saya mengalir lancar sejak hari ke-2. Bidan dengan sangat telaten merawat tali pusat Malik dan memandu saya cara menyusui yang benar tanpa rasa nyeri lecet.',
-    rating: 5,
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
-    highlight: 'Daily Homecare Penuh Cinta'
-  }
-];
-
-export const ARTICLES_DATA: ArticleItem[] = [
-  {
-    id: 'posisi-panggul-pembukaan-cepat',
-    title: '5 Posisi Panggul Aktif untuk Mempercepat Pembukaan Alami Tanpa Induksi',
-    category: 'Persalinan Alami',
-    readTime: '5 Menit Baca',
-    date: '12 Mei 2025',
-    author: 'Bidan Annisa Larasati (mii and maa)',
-    summary: 'Posisi tidur terlentang (lithotomy) seringkali memperlambat penurunan kepala bayi. Ketahui posisi tegak asimetris yang membuka ruang panggul hingga 30% lebih lebar.',
-    content: [
-      'Banyak ibu diinstruksikan untuk berbaring di tempat tidur saat kontraksi datang. Padahal menurut fisiologi kebidanan modern, gravitasi dan gerakan aktif adalah sahabat terbaik persalinan.',
-      '1. Side-Lying dengan Peanut Ball: Sangat cocok saat ibu lelah namun ingin menjaga panggul tetap terbuka lebar.',
-      '2. Asymmetric Lunges (Gerakan Terjang Satu Sisi): Membantu memutar kepala bayi yang masih berada di posisi posterior (menghadap ke depan).',
-      '3. Pelvic Rocking di atas Birth Ball: Melenturkan otot dasar panggul dan meredakan tekanan saraf di tulang ekor.',
-      '4. Standing Supported Squat: Menggunakan bantuan pasangan atau selendang Rebozo untuk memanfaatkan gravitasi bumi 100%.',
-      '5. Hands and Knees (Posisi Merangkak): Posisi paling aman untuk mengurangi nyeri punggung luar biasa (back labor).'
-    ],
-    takeaways: [
-      'Gerakan panggul aktif mempercepat fase aktif rata-rata 1-2 jam lebih cepat.',
-      'Gunakan bantuan Birth Ball untuk mengurangi ketegangan pinggang bawah.',
-      'Libatkan pasangan untuk memandu pergantian posisi setiap 30 menit.'
-    ],
-    image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'kontraksi-asli-vs-palsu',
-    title: 'Tanda Kontraksi Asli vs Kontraksi Palsu (Braxton Hicks): Kapan Harus Hubungi Bidan?',
-    category: 'Kehamilan',
-    readTime: '4 Menit Baca',
-    date: '28 April 2025',
-    author: 'Bidan Annisa Larasati (mii and maa)',
-    summary: 'Jangan buru-buru panik ke klinik di tengah malam jika kontraksi belum teratur. Pelajari aturan 5-1-1 dan ciri khas gelombang rahim sesungguhnya.',
-    content: [
-      'Memasuki usia kehamilan 36 minggu ke atas, rahim mulai melakukan "gladi resik" melalui kontraksi Braxton Hicks. Seringkali calon orang tua tergesa-gesa ke rumah sakit hanya untuk diberitahu pembukaan belum ada.',
-      'Perbedaan Utama:',
-      '• Kontraksi Palsu (Braxton Hicks): Polanya tidak teratur, durasinya singkat (15-30 detik), rasa kencang hanya di bagian depan perut, dan mereda saat ibu minum air putih hangat atau berganti posisi.',
-      '• Kontraksi Asli (True Labor): Memiliki interval yang makin rapat (misal tiap 5 menit), durasinya makin panjang (45-60 detik), sensasinya menyebar dari pinggang belakang melingkar ke bawah perut, dan TIDAK hilang saat ibu istirahat.',
-      'Kapan Harus Berangkat? Terapkan rumus 5-1-1: Kontraksi datang setiap 5 menit sekali, berlangsung selama minimal 1 menit, dan telah konsisten terjadi selama 1 jam berturut-turut.'
-    ],
-    takeaways: [
-      'Gunakan aplikasi penghitung kontraksi untuk merekam jeda waktu dengan akurat.',
-      'Tetaplah tenang di rumah pada fase laten (pembukaan 1-3) untuk menghemat energi fisik.',
-      'Segera hubungi tim homecare mii and maa jika ada cairan ketuban merembes atau flek lendir darah tebal.'
-    ],
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'perineum-utuh-tanpa-jahitan',
-    title: 'Rahasia Perineum Utuh: Panduan Pijat Perineum & Teknik Nafas Tiup-Tiup',
-    category: 'Persalinan Alami',
-    readTime: '6 Menit Baca',
-    date: '15 April 2025',
-    author: 'Bidan Annisa Larasati (mii and maa)',
-    summary: 'Mitos bahwa semua kelahiran anak pertama harus digunting (episiotomi) adalah keliru. Simak cara menjaga elastisitas jaringan jalan lahir secara ilmiah.',
-    content: [
-      'Kekhawatiran terbesar banyak ibu adalah rasa sakit saat dijahit paska melahirkan. Padahal robekan perineum derajat berat dapat dicegah dengan persiapan yang terencana sejak trimester ketiga.',
-      '1. Rutin Pijat Perineum (Mulai UK 34 Minggu): Gunakan minyak almond murni organik. Lakukan gerakan U lembut di bibir bawah vagina selama 5-10 menit, 3-4 kali seminggu untuk meningkatkan elastisitas serat otot.',
-      '2. Hindari Mengedan Seperti BAB Keras (Valsalva Maneuver): Mengedan sambil menahan napas dan mata terpejam meningkatkan tekanan mendadak yang memicu robekan.',
-      '3. Terapkan Teknik "Napas Tiup-Tiup" (Breathing the Baby Down): Saat kepala bayi sudah di jalan lahir (crowning), tiup napas perlahan seperti meniup lilin ulang tahun agar jaringan meregang bertahap mengikuti irama alami.'
-    ],
-    takeaways: [
-      'Pijat perineum terbukti mengurangi risiko robekan tingkat 3 & 4 hingga 64%.',
-      'Kompres hangat pada area perineum saat pembukaan lengkap sangat membantu relaksasi.',
-      'Komunikasikan dengan penolong persalinan agar tidak melakukan episiotomi rutin.'
-    ],
-    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: 'manajemen-laktasi-hari-pertama',
-    title: 'Manajemen Kolostrum & Tips Mengatasi Payudara Bengkak di Hari ke-3',
-    category: 'Laktasi',
-    readTime: '5 Menit Baca',
-    date: '02 April 2025',
-    author: 'Bidan Annisa Larasati (mii and maa)',
-    summary: 'Mengapa ASI tampak belum keluar di hari pertama? Kenali ukuran lambung bayi baru lahir dan cara menstimulasi refleks let-down tanpa stres.',
-    content: [
-      'Banyak ibu baru merasa gagal menyusui karena ASI belum memancar deras di hari pertama. Ketahuilah bahwa lambung bayi usia 1 hari hanya berukuran sebesar kelereng (5-7 ml)!',
-      'Cairan kuning kental bernama kolostrum yang keluar sedikit demi sedikit justru adalah vaksin alami pertama yang kaya imunoglobulin A (IgA).',
-      'Saat hari ke-3 atau ke-4, lonjakan hormon prolaktin menyebabkan "milk coming in" yang kerap memicu payudara mengeras dan bengkak (engorgement). Atasi dengan teknik kompres hangat sebelum menyusu, pijat oksitosin di tulang belakang oleh suami, dan layanan kunjungan homecare laktasi mii and maa.'
-    ],
-    takeaways: [
-      'Jangan buru-buru memberi susu formula tanpa indikasi medis; kolostrum cukup untuk 3 hari pertama.',
-      'Pelekatan (latch on) yang dalam adalah kunci utama menyusui tanpa rasa nyeri.',
-      'Pijat punggung suami secara signifikan memicu hormon oksitosin.'
-    ],
-    image: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80'
+    fear: 'Payudara Bengkak, Keras & ASI Macet',
+    fearDesc: 'Cemas saat ASI belum lancar dan payudara terasa nyeri atau meradang.',
+    solution: 'Breast Care Terpadu & Pijat Oksitosin',
+    solutionDesc: 'Kombinasi pijat laktasi lembut dan stimulasi oksitosin punggung untuk melancarkan aliran ASI seketika tanpa rasa sakit.'
   }
 ];
 
 export const PRODUCTS_DATA: ProductItem[] = [
   {
     id: 'buku-lahir-senyuman',
-    name: 'Buku "Lahir dengan Senyuman" (Signed Edition + Jurnal Kehamilan)',
+    name: 'Buku Panduan Ibu & Bayi mii and maa',
     category: 'Edukasi',
-    price: 135000,
-    priceFormatted: 'Rp 135.000',
+    price: 125000,
+    priceFormatted: 'Rp 125.000',
     rating: 4.9,
     reviewsCount: 342,
     badge: 'Best Seller 📚',
-    description: 'Buku pegangan wajib calon orang tua karya Bidan Annisa Larasati. Dilengkapi panduan afirmasi harian, barcode audio relaksasi, dan lembar kerja birth plan.',
+    description: 'Buku panduan praktis perawatan bayi baru lahir, manajemen laktasi, dan pemulihan nifas karya Bidan Sulastria TM.',
     features: [
-      '240 halaman full color dengan ilustrasi anatomi yang ramah & mudah dipahami',
-      'Free Audio Guide Hypnobirthing MP3 via QR code',
-      'Bonus Planner Kehamilan 40 Minggu & Template Catatan Gerakan Janin',
-      'Tanda tangan langsung & pesan doa khusus dari Bidan Annisa'
+      'Panduan langkah demi langkah memandikan bayi & pijat ILU',
+      'Tips pelekatan menyusui bebas puting lecet',
+      'Jadwal imunisasi & stimulasi tumbuh kembang'
     ],
     image: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'
+  }
+];
+
+export const BIRTH_STORIES: BirthStory[] = [
+  {
+    id: 'story-1',
+    motherName: 'Mama Gisella',
+    fatherName: 'Papa Dimas',
+    babyName: 'Baby Arka (1 Bulan)',
+    location: 'Bandung - Homecare Visit',
+    birthLocation: 'Bandung (Homecare Visit)',
+    serviceTaken: 'Paket Bundling 5 Hari & Breast Care',
+    quote: 'ASI saya yang sempat macet di hari ke-3 langsung lancar deras setelah dipijat laktasi oleh Bidan mii and maa.',
+    story: 'Pelayanan bidannya luar biasa sabar, telaten, dan ramah banget. Bidan Sulastria dan tim benar-benar membantu saya melewati masa-masa awal new mom yang penuh cemas. Baby Arka juga tidurnya jadi pules banget setelah baby massage!',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=600&q=80',
+    highlight: 'ASI Lancar & Bayi Tidur Nyenyak'
   },
   {
-    id: 'mamacalm-perineal-oil',
-    name: 'mii and maa™ Organic Perineal & Labor Massage Oil (100ml)',
-    category: 'Persiapan Lahir',
-    price: 110000,
-    priceFormatted: 'Rp 110.000',
-    rating: 4.9,
-    reviewsCount: 218,
-    badge: 'Bidan Approved 🌿',
-    description: 'Minyak formulasi khusus 100% cold-pressed organic sweet almond, jojoba, vitamin E, dan ekstrak chamomile untuk elastisitas jalan lahir.',
-    features: [
-      'Aman untuk area mukosa sensitif tanpa pewangi sintetis atau paraben',
-      'Meningkatkan fleksibilitas jaringan perineum sebelum persalinan',
-      'Dapat digunakan sebagai minyak pijat pinggang suami saat fase kontraksi',
-      'Tekstur licin tahan lama tanpa rasa lengket'
-    ],
-    image: 'https://images.unsplash.com/photo-1608248597359-52e69a9b6c00?auto=format&fit=crop&w=600&q=80'
+    id: 'story-2',
+    motherName: 'Mama Fathia',
+    fatherName: 'Papa Reza',
+    babyName: 'Baby Zayn (2 Minggu)',
+    location: 'Cimahi - Homecare Visit',
+    birthLocation: 'Cimahi (Homecare Visit)',
+    serviceTaken: 'Pijat Pediatric Kolik & Pijat Nifas',
+    quote: 'Baby Zayn sering nangis kencang tiap jam 7 malam karena kolik. Setelah dipijat pediatric oleh bidan, kembungnya hilang total!',
+    story: 'Gak perlu repot macet-macetan bawa bayi baru lahir ke klinik. Bidan mii and maa datang tepat waktu dengan perlengkapan steril dan minyak wangi yang menenangkan. Sangat recommended untuk para mama di Bandung & Cimahi!',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
+    highlight: 'Kolik Mereda Tanpa Obat'
   },
   {
-    id: 'birth-ball-anti-burst',
-    name: 'Anti-Burst Maternity Birth Ball 65cm + Pompa & Poster Gerakan',
-    category: 'Persiapan Lahir',
-    price: 185000,
-    priceFormatted: 'Rp 185.000',
-    rating: 4.8,
-    reviewsCount: 184,
-    badge: 'Perlengkapan Wajib 🤰',
-    description: 'Bola persalinan berbahan PVC tebal anti-pecah (anti-burst up to 300kg) bertekstur matte anti-slip untuk latihan panggul di rumah.',
-    features: [
-      'Ukuran 65cm ideal untuk tinggi badan ibu hamil 150 - 170 cm',
-      'Termasuk pompa angin cepat (quick foot pump) & alat pengukur diameter',
-      'Bonus Poster 12 Gerakan Optimalisasi Panggul Trimester 3 & Ruang Bersalin',
-      'Material ramah lingkungan BPA-free'
+    id: 'story-3',
+    motherName: 'Mama Brenda',
+    fatherName: 'Papa Bagas',
+    babyName: 'Baby Chloe (Newborn)',
+    location: 'Jabodetabek - Homecare Visit',
+    birthLocation: 'Jabodetabek (Homecare Visit)',
+    serviceTaken: 'Tindik Telinga & Potong Rambut Newborn',
+    quote: 'Tindik telinga baby Chloe cepat banget dan higienis. Chloe cuma nangis 2 detik trus tenang lagi.',
+    story: 'Puas banget sama layanan mii and maa Daily Homecare. Bidan sangat profesional dalam menentukan titik tindik yang simetris dan jarumnya steril sekali pakai. Hasilnya rapi dan cepat sembuh!',
+    rating: 5,
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80',
+    highlight: 'Tindik Rapi & Minim Tangisan'
+  }
+];
+
+export const ARTICLES_DATA: ArticleItem[] = [
+  {
+    id: 'cara-atasi-bayi-kembung-kolik',
+    title: 'Cara Mengatasi Bayi Kembung & Rewel di Malam Hari dengan Pijat ILU di Rumah',
+    category: 'Baby Care',
+    readTime: '4 Menit Baca',
+    date: '10 Mei 2025',
+    author: 'Tim Bidan mii and maa',
+    summary: 'Mengenali tanda gas terjebak di perut bayi dan langkah mudah melakukan pijatan I Love You (ILU) yang aman dan menenangkan.',
+    content: [
+      'Perut kembung pada bayi baru lahir terjadi karena sistem pencernaan yang masih dalam tahap pematangan. Bayi seringkali menelan udara saat menyusu atau menangis.',
+      'Tanda-tanda bayi kembung: Perut teraba agak keras seperti balon, bayi sering menarik kedua kakinya ke arah dada, dan menangis rewel terutama di sore hingga malam hari (kolik).',
+      'Langkah Pijatan ILU Mandiri di Rumah:',
+      '1. Huruf I: Usap lembut sisi kiri perut bayi dari atas ke bawah menggunakan minyak almond/telon.',
+      '2. Huruf L Terbalik: Usap dari kanan atas perut bayi mendatar ke kiri, lalu turun ke bawah.',
+      '3. Huruf U Terbalik: Usap melengkung dari kanan bawah naik ke atas, mendatar ke kiri, dan turun ke kiri bawah mengikuti alur usus besar.',
+      'Lakukan gerakan kayuh sepeda secara perlahan selama 1-2 menit untuk membantu gas keluar secara alami.'
     ],
-    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80'
+    takeaways: [
+      'Pijat ILU efektif membantu pelepasan gas tanpa obat-obatan kimia.',
+      'Pastikan bayi disendawakan tegak setiap selesai menyusu.',
+      'Panggil bidan homecare mii and maa jika kembung disertai muntah atau demam.'
+    ],
+    image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80'
   },
   {
-    id: 'korset-nifas-bambu',
-    name: 'Korset Nifas Medis 3-in-1 Serat Bambu Antibakteri',
-    category: 'Perawatan Nifas',
-    price: 245000,
-    priceFormatted: 'Rp 245.000',
-    rating: 4.9,
-    reviewsCount: 156,
-    badge: 'Pemulihan Cepat ✨',
-    description: 'Penyangga perut dan panggul pasca salin yang lembut, elastis, dan menyerap keringat. Aman untuk ibu bersalin normal maupun pasca operasi Caesar.',
-    features: [
-      'Bahan serat bambu alami yang sejuk dan tidak menimbulkan gatal/ruam',
-      '3 sabuk terpisah: Sabuk Perut, Sabuk Pinggang, dan Sabuk Tulang Panggul',
-      'Membantu merapatkan kembali otot rektus abdominis (diastasis recti)',
-      'Pengait velcro medis ekstra kuat dengan tekanan yang dapat diatur'
+    id: 'rahasia-asi-deras-pijat-oksitosin',
+    title: 'Rahasia ASI Deras Tanpa Nyeri: Manfaat Kombinasi Pijat Laktasi & Pijat Oksitosin',
+    category: 'Laktasi',
+    readTime: '5 Menit Baca',
+    date: '25 April 2025',
+    author: 'Bidan Sulastria TM',
+    summary: 'Mengapa produksi ASI sangat dipengaruhi oleh rasa rileks dan hormon cinta? Simak cara kerja Breast Care terpadu.',
+    content: [
+      'Banyak ibu baru mengira bahwa kunci ASI banyak adalah makanan dan suplemen saja. Padahal, hormon oksitosin (hormon let-down refleks) hanya keluar optimal saat mama merasa tenang, nyaman, dan bahagia.',
+      'Pijat Laktasi berfokus pada kelenjar payudara untuk melembutkan jaringan dan membuka sumbatan ductus ASI.',
+      'Sedangkan Pijat Oksitosin dilakukan di sepanjang tulang belakang (titik meridian punggung). Sentuhan lembut di punggung ini memicu otak melepaskan hormon oksitosin dalam hitungan menit, membuat ASI memancar deras tanpa rasa sakit memeras payudara.'
     ],
-    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80'
+    takeaways: [
+      'Pijat oksitosin di punggung sangat ampuh meredakan stres dan melancarkan ASI.',
+      'Jangan memencet paksa payudara yang mengeras; gunakan kompres hangat lembut.',
+      'Layanan Breast Care mii and maa siap membantu langsung di rumah mama.'
+    ],
+    image: 'https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'manfaat-pijat-hamil-trimester-3',
+    title: 'Manfaat Pijat Hamil di Trimester 3 untuk Mempersiapkan Panggul & Relaksasi',
+    category: 'Mom Care',
+    readTime: '4 Menit Baca',
+    date: '15 April 2025',
+    author: 'Tim Bidan mii and maa',
+    summary: 'Bagaimana Pregnancy Massage yang aman dapat meredakan nyeri punggung bawah dan membantu tidur lebih nyenyak menjelang persalinan.',
+    content: [
+      'Memasuki usia kehamilan 28 minggu ke atas, beban rahim yang membesar menarik titik tumpu tubuh ke depan (*lordosis fisiologis*), menyebabkan otot pinggang bawah dan panggul bekerja ekstra keras.',
+      'Pijat hamil profesional oleh bidan mii and maa menggunakan posisi berbaring miring yang ditopang bantal empuk (*side-lying position*).',
+      'Sentuhan lembut membantu melenturkan ligamen panggul, meredakan pembengkakan kaki akibat retensi cairan, serta menurunkan hormon kortisol (stres) sehingga bumil siap menyambut persalinan dengan tenang.'
+    ],
+    takeaways: [
+      'Pijat hamil hanya boleh dilakukan oleh tenaga terlatih kebidanan.',
+      'Hindari penekanan pada titik akupresur tertentu yang memicu kontraksi dini.',
+      'Jadwalkan sesi pijat hamil 1-2 minggu sekali untuk kenyamanan maksimal.'
+    ],
+    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80'
+  },
+  {
+    id: 'panduan-memandikan-bayi-newborn',
+    title: 'Panduan Memandikan Bayi Baru Lahir & Merawat Tali Pusat Tanpa Panik',
+    category: 'Parenting',
+    readTime: '5 Menit Baca',
+    date: '02 April 2025',
+    author: 'Bidan Sulastria TM',
+    summary: 'Langkah praktis bagi new mom & dad memandikan si kecil dengan air hangat steril dan menjaga tali pusat tetap kering.',
+    content: [
+      'Memandikan bayi pertama kali di rumah sering membuat orang tua baru gemetar karena takut bayi licin atau air masuk ke telinga.',
+      'Tips Aman dari Tim Bidan mii and maa:',
+      '1. Siapkan suhu air hangat suam-suam kuku (sekitar 37°C, uji dengan siku tangan Anda).',
+      '2. Gunakan teknik cengkeraman bola (satu tangan menopang leher dan bahu bayi dengan mantap).',
+      '3. Untuk tali pusat: Jangan dibubuhi alkohol, antiseptik, atau rempah apapun. Cukup keringkan dengan kassa steril setelah mandi agar puput alami dalam 7-14 hari.'
+    ],
+    takeaways: [
+      'Jaga ruangan tetap hangat dan bebas hembusan angin AC langsung saat memandikan.',
+      'Tali pusat cukup dirawat kering dan terbuka bersih sesuai standar WHO.',
+      'Ikuti sesi Kelas Parenting mii and maa untuk bimbingan praktik langsung di rumah.'
+    ],
+    image: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80'
   }
 ];
 
@@ -589,8 +547,7 @@ export const HOSPITAL_BAG_CHECKLIST = [
       { id: 'doc-2', text: 'Kartu Keluarga (KK) & Buku Nikah Asli + Fotokopi', done: false },
       { id: 'doc-3', text: 'Buku Kesehatan Ibu dan Anak (Buku KIA / Pink)', done: true },
       { id: 'doc-4', text: 'Kartu Asuransi / BPJS Kesehatan Aktif', done: false },
-      { id: 'doc-5', text: 'Lembar Rencana Persalinan (Birth Plan) yang Sudah Ditandatangani', done: true },
-      { id: 'doc-6', text: 'Hasil USG & Pemeriksaan Lab Trimester 3 Terakhir', done: false }
+      { id: 'doc-5', text: 'Hasil USG & Pemeriksaan Lab Trimester 3 Terakhir', done: false }
     ]
   },
   {
@@ -600,9 +557,8 @@ export const HOSPITAL_BAG_CHECKLIST = [
       { id: 'mom-2', text: 'Pembalut Nifas Ekstra Panjang (Ukuran 35-45 cm, minimal 2 pack)', done: false },
       { id: 'mom-3', text: 'Celana Dalam Katun Longgar / Disposable Underwear (6-8 Pcs)', done: false },
       { id: 'mom-4', text: 'Bra Menyusui Tanpa Kawat (3 Pcs) & Nipple Cream Organik', done: false },
-      { id: 'mom-5', text: 'Minyak Pijat Perineum / Minyak Telon & Essential Oil Diffuser', done: false },
-      { id: 'mom-6', text: 'Korset Nifas Medis Serat Bambu', done: false },
-      { id: 'mom-7', text: 'Perlengkapan Mandi Pribadi & Sandal Karet Nyaman Anti-Slip', done: false }
+      { id: 'mom-5', text: 'Minyak Pijat Relaksasi / Minyak Telon & Korset Nifas', done: false },
+      { id: 'mom-6', text: 'Perlengkapan Mandi Pribadi & Sandal Karet Nyaman Anti-Slip', done: false }
     ]
   },
   {
@@ -621,37 +577,36 @@ export const HOSPITAL_BAG_CHECKLIST = [
     items: [
       { id: 'dad-1', text: 'Pakaian Ganti Suami (2-3 Pasang) & Jaket Hangat', done: false },
       { id: 'dad-2', text: 'Powerbank Kapasitas Besar & Kabel Charger Ekstra Panjang', done: false },
-      { id: 'dad-3', text: 'Kudapan Penambah Energi (Kurma, Madu, Kacang Almond, Air Kelapa)', done: false },
-      { id: 'dad-4', text: 'Kain Rebozo untuk Pijat & Bantal Leher', done: false },
-      { id: 'dad-5', text: 'Uang Tunai Secukupnya untuk Keperluan Darurat', done: false }
+      { id: 'dad-3', text: 'Kudapan Penambah Energi & Air Mineral', done: false },
+      { id: 'dad-4', text: 'Uang Tunai Secukupnya untuk Keperluan Darurat', done: false }
     ]
   }
 ];
 
 export const FAQ_DATA: FAQItem[] = [
   {
-    category: 'Layanan & Kelas',
-    question: 'Bagaimana cara memesan layanan Daily Homecare mii and maa?',
-    answer: 'Anda dapat langsung mengklik tombol "Konsultasi Sekarang" atau menghubungi admin WhatsApp kami. Tim bidan kami akan menjadwalkan kunjungan homecare sesuai waktu yang paling nyaman untuk Anda dan si kecil.'
+    category: 'Layanan & Wilayah',
+    question: 'Wilayah mana saja yang dijangkau oleh layanan Daily Homecare mii and maa?',
+    answer: 'Layanan Daily Homecare kami melayani kunjungan ke rumah di wilayah BANDUNG, CIMAHI, KBB (Kabupaten Bandung Barat), hingga JABODETABEK. Tim bidan kami siap datang langsung ke kediaman Anda dengan membawa seluruh peralatan steril dan minyak alami.'
   },
   {
-    category: 'Layanan & Kelas',
-    question: 'Kapan waktu yang paling ideal untuk mulai mengikuti Kelas Gentle Birth & Yoga?',
-    answer: 'Waktu terbaik untuk memulai prenatal yoga adalah saat kehamilan menginjak usia 16-20 minggu (Trimester 2) saat morning sickness sudah mereda. Untuk Kelas Workshop Gentle Birth & Pelatihan Suami (Birth Partner), kami sarankan diikuti pada usia kehamilan 24-34 minggu.'
+    category: 'Layanan & Pemesanan',
+    question: 'Bagaimana cara reservasi jadwal kunjungan bidan ke rumah?',
+    answer: 'Sangat mudah! Anda dapat mengklik tombol "Konsultasi Sekarang" pada website ini atau chat WhatsApp ke nomor resmi kami 0811-2037-714. Kami menyarankan untuk melakukan pendaftaran H-1 agar slot waktu bidan dapat disesuaikan dengan kenyamanan mama dan si kecil.'
   },
   {
-    category: 'Layanan & Kelas',
-    question: 'Apakah suami / pasangan wajib ikut mendampingi di sesi kelas?',
-    answer: 'Sangat disarankan! Di mii and maa, peran suami dipandang krusial sebagai "Birth Partner". Kami membekali suami keterampilan praktis memijat pinggang, mengarahkan napas saat kontraksi, serta memberikan perlindungan emosional agar ibu merasa aman 100% saat bersalin.'
+    category: 'Perawatan Bayi',
+    question: 'Apakah pijat bayi & pediatric aman untuk bayi newborn yang baru berusia beberapa hari?',
+    answer: 'Sangat aman. Seluruh tindakan pijat bayi dilakukan oleh bidan berlisensi resmi yang telah tersertifikasi khusus Mom & Baby Spa serta Pediatric Care. Gerakan dilakukan dengan tekanan sangat lembut sesuai usia bayi untuk melancarkan peredaran darah, meredakan perut kembung, dan membantu bayi tidur lebih nyenyak.'
   },
   {
-    category: 'Klinik & Medis',
-    question: 'Apakah layanan mii and maa menerima rujukan ke Rumah Sakit jika terjadi komplikasi?',
-    answer: 'Tentu saja. Sebagai tenaga kesehatan berlisensi resmi (STR & SIPB aktif), kami memiliki jejaring rujukan resmi dengan berbagai Rumah Sakit rujukan dan Dokter Spesialis Obgyn (Sp.OG). Keselamatan ibu dan bayi adalah prioritas utama kami di atas segalanya.'
+    category: 'Perawatan Ibu',
+    question: 'Kapan waktu terbaik untuk melakukan Breast Care (Pijat Laktasi & Oksitosin)?',
+    answer: 'Breast care dapat dimulai sejak hari ke-2 atau ke-3 pascapersalinan, terutama saat payudara mulai terasa mengeras, bengkak, atau ASI belum keluar lancar. Pijat oksitosin di punggung sangat efektif merangsang hormon prolaktin dan oksitosin agar ASI memancar deras tanpa rasa sakit.'
   },
   {
-    category: 'Homecare & Doula',
-    question: 'Berapa luas jangkauan wilayah untuk layanan Daily Homecare & Kunjungan Nifas?',
-    answer: 'Layanan kunjungan rumah (Daily Homecare nifas, pijat laktasi, dan baby spa) saat ini melayani seluruh area Jakarta, Tangerang Selatan, Depok, Bekasi, dan Bogor. Tim bidan kami membawa seluruh peralatan higienis dan bahan alami langsung ke kediaman Anda.'
+    category: 'Paket & Pembayaran',
+    question: 'Apa keuntungan memilih Paket Bundling Perawatan (3 Hari, 5 Hari, 7 Hari)?',
+    answer: 'Dengan Paket Bundling, mama mendapatkan harga yang jauh lebih hemat dibandingkan kunjungan satuan, pendampingan pemulihan yang berkesinambungan, serta bonus perawatan tambahan (seperti free treatment relaksasi atau konsultasi prioritas) selama masa nifas.'
   }
 ];

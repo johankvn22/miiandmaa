@@ -1,15 +1,23 @@
 import React from 'react';
 import { 
   Sparkles, 
-  Calendar, 
   CheckCircle2, 
-  Award
+  MapPin,
+  Heart
 } from 'lucide-react';
 import { CLINIC_INFO, PRACTITIONER_DATA } from '../data/content';
 
 interface HeroProps {
   onOpenBooking: (serviceId?: string) => void;
 }
+
+const InstagramIcon = ({ size = 18, color = 'currentColor' }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
   return (
@@ -65,18 +73,35 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               color: 'var(--charcoal-900)',
               lineHeight: 1.2
             }}>
-              Mempersiapkan Persalinan <span style={{ color: 'var(--plum-600)', fontStyle: 'italic' }}>Nyaman, Tenang</span>, dan Asuhan Homecare Terpercaya
+              Jasa Perawatan Mama dan Si Kecil <span style={{ color: 'var(--plum-600)', fontStyle: 'italic' }}>Kapan Saja & Di Mana Saja</span> Tanpa Harus Keluar Rumah
             </h1>
 
-            {/* Subheadline with emotional connection */}
+            {/* Subheadline aligned with Instagram Bio */}
             <p style={{
               fontSize: '1.15rem',
               color: 'var(--charcoal-700)',
               lineHeight: 1.75,
+              marginBottom: '24px'
+            }}>
+              Pelayanan kesehatan ibu dan anak oleh <strong>Tim Bidan Berkompeten & Berpengalaman</strong>. Layanan Mom & Baby Spa, Pijat Laktasi & Oksitosin, Pijat Pediatric Bayi Kembung/Kolik, hingga Perawatan Nifas langsung ke kediaman Anda.
+            </p>
+
+            {/* Area Badge Banner */}
+            <div style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              backgroundColor: 'var(--plum-50)',
+              border: '1px solid var(--border-plum)',
+              padding: '8px 16px',
+              borderRadius: 'var(--radius-full)',
               marginBottom: '32px'
             }}>
-              <strong>mii and maa Daily Homecare</strong> menggabungkan asuhan kebidanan medis berbasis bukti dengan kehangatan perawatan di rumah, relaksasi napas <em>hypnobirthing</em>, pijat laktasi, dan pendampingan keluarga yang penuh cinta.
-            </p>
+              <MapPin size={16} color="var(--plum-700)" />
+              <span style={{ fontSize: '0.86rem', fontWeight: 700, color: 'var(--plum-800)' }}>
+                📍 {CLINIC_INFO.coverageAreas}
+              </span>
+            </div>
 
             {/* Action Buttons */}
             <div style={{
@@ -86,25 +111,27 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               marginBottom: '36px'
             }}>
               <button 
-                onClick={() => onOpenBooking('postpartum-homecare')}
+                onClick={() => onOpenBooking('bundling-3-hari')}
                 className="btn btn-primary btn-lg"
                 style={{ cursor: 'pointer' }}
               >
                 <Sparkles size={18} />
-                <span>Pesan Daily Homecare</span>
+                <span>Daftar via WhatsApp (H-1)</span>
               </button>
 
-              <button 
-                onClick={() => onOpenBooking('gentle-birth-class')}
+              <a 
+                href={CLINIC_INFO.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-secondary btn-lg"
-                style={{ cursor: 'pointer' }}
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
               >
-                <Calendar size={18} />
-                <span>Daftar Kelas & Konsultasi</span>
-              </button>
+                <InstagramIcon size={18} color="var(--plum-700)" />
+                <span>Lihat Instagram (56.4K)</span>
+              </a>
             </div>
 
-            {/* Quick Benefits Bullet List */}
+            {/* Quick Benefits Bullet List based on Real Instagram Offerings */}
             <div style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
@@ -114,19 +141,19 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: 'var(--charcoal-700)' }}>
                 <CheckCircle2 size={18} color="var(--plum-600)" />
-                <span>Kunjungan Homecare Nifas & Bayi</span>
+                <span>Baby & Kids Spa (Pijat Bayi)</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: 'var(--charcoal-700)' }}>
                 <CheckCircle2 size={18} color="var(--plum-600)" />
-                <span>Pijat Laktasi & Terapi Payudara</span>
+                <span>Breast Care (Pijat Laktasi & Oksitosin)</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: 'var(--charcoal-700)' }}>
                 <CheckCircle2 size={18} color="var(--plum-600)" />
-                <span>Kelas Hypnobirthing & Birth Partner</span>
+                <span>Pijat Hamil & Nifas (Postnatal)</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.9rem', color: 'var(--charcoal-700)' }}>
                 <CheckCircle2 size={18} color="var(--plum-600)" />
-                <span>Pendampingan Doula 24 Jam</span>
+                <span>Pediatric Kolik, Tindik & Jasa Infus</span>
               </div>
             </div>
 
@@ -146,7 +173,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
             }}>
               <img 
                 src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=1000&q=80" 
-                alt="Ibu dan bayi baru lahir dalam dekapan penuh kasih asuhan mii and maa daily homecare"
+                alt="Ibu dan bayi baru lahir asuhan mii and maa daily homecare"
                 style={{
                   width: '100%',
                   height: '480px',
@@ -169,10 +196,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 color: '#FFFFFF'
               }}>
                 <div style={{ fontSize: '0.85rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  mii and maa • Daily Homecare
+                  Mom & Baby Spa • Daily Homecare
                 </div>
                 <div style={{ fontFamily: 'var(--font-serif)', fontSize: '1.25rem', fontWeight: 600 }}>
-                  Bersama {PRACTITIONER_DATA.name}
+                  Dipimpin oleh {PRACTITIONER_DATA.name}
                 </div>
               </div>
             </div>
@@ -210,7 +237,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                   mii and maa
                 </div>
                 <div style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--plum-600)', textTransform: 'uppercase' }}>
-                  Daily Homecare
+                  Mom & Baby Spa
                 </div>
               </div>
             </div>
@@ -243,11 +270,11 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
                 justifyContent: 'center',
                 color: 'var(--plum-700)'
               }}>
-                <Award size={22} />
+                <Heart size={22} />
               </div>
               <div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--charcoal-500)', fontWeight: 600 }}>Praktisi Bersertifikat</div>
-                <div style={{ fontSize: '0.96rem', fontWeight: 700, color: 'var(--charcoal-900)' }}>Hypnobirthing & Laktasi CLC</div>
+                <div style={{ fontSize: '0.78rem', color: 'var(--charcoal-500)', fontWeight: 600 }}>Terbukti Bermanfaat untuk</div>
+                <div style={{ fontSize: '0.96rem', fontWeight: 700, color: 'var(--charcoal-900)' }}>Ribuan Mama & Si Kecil 💖</div>
               </div>
             </div>
 

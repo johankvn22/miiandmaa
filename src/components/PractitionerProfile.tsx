@@ -1,17 +1,24 @@
 import React from 'react';
 import { 
   Award, 
-  BookOpen, 
   ShieldCheck, 
-  Tv, 
   CheckCircle2, 
-  Quote
+  Quote,
+  MapPin
 } from 'lucide-react';
-import { PRACTITIONER_DATA } from '../data/content';
+import { PRACTITIONER_DATA, CLINIC_INFO } from '../data/content';
 
 interface PractitionerProfileProps {
   onOpenBooking: () => void;
 }
+
+const InstagramIcon = ({ size = 16, color = 'currentColor' }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
 
 export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpenBooking }) => {
   return (
@@ -27,15 +34,15 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
         
         {/* Section Header */}
         <div className="section-header">
-          <div className="section-tag">
+          <div className="section-tag" style={{ backgroundColor: 'var(--plum-50)', color: 'var(--plum-700)', borderColor: 'var(--border-plum)' }}>
             <Award size={16} />
-            <span>About Us & Profil Praktisi</span>
+            <span>About Us & Tim Bidan</span>
           </div>
           <h2 className="section-title">
-            Didampingi oleh Tenaga Medis Berpengalaman & Tersertifikasi
+            Tentang mii and maa Daily Homecare
           </h2>
           <p className="section-subtitle">
-            Kombinasi keilmuan kebidanan formal, lisensi resmi Dinas Kesehatan, serta sertifikasi gentle birth internasional untuk rasa aman maksimal.
+            Pelayanan kesehatan ibu dan anak yang dipimpin oleh Bidan Sulastria TM dan didukung oleh tim bidan yang berkompeten, berpengalaman, serta tersertifikasi khusus.
           </p>
         </div>
 
@@ -45,7 +52,7 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
           gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
           gap: '48px',
           alignItems: 'center',
-          marginBottom: '56px'
+          marginBottom: '48px'
         }}>
           
           {/* Left Column: Portrait Image & Credentials Badges */}
@@ -54,8 +61,8 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
               borderRadius: '28px',
               overflow: 'hidden',
               boxShadow: 'var(--shadow-lg)',
-              border: '6px solid var(--sand-50)',
-              backgroundColor: 'var(--sage-100)',
+              border: '6px solid var(--plum-50)',
+              backgroundColor: 'var(--plum-100)',
               position: 'relative'
             }}>
               <img 
@@ -63,14 +70,14 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
                 alt={PRACTITIONER_DATA.name}
                 style={{
                   width: '100%',
-                  height: '520px',
+                  height: '500px',
                   objectFit: 'cover'
                 }}
               />
               <div style={{
                 position: 'absolute',
                 inset: 0,
-                background: 'linear-gradient(to top, rgba(28, 38, 33, 0.7) 0%, transparent 45%)'
+                background: 'linear-gradient(to top, rgba(70, 20, 44, 0.75) 0%, transparent 45%)'
               }} />
               <div style={{
                 position: 'absolute',
@@ -86,12 +93,12 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
                   {PRACTITIONER_DATA.name}
                 </div>
                 <div style={{ fontSize: '0.85rem', opacity: 0.9, marginTop: '4px' }}>
-                  {PRACTITIONER_DATA.licenseSTR}
+                  mii and maa Daily Homecare (Bandung, Cimahi, KBB & Jabodetabek)
                 </div>
               </div>
             </div>
 
-            {/* License Floating Card */}
+            {/* Floating Card */}
             <div className="glass-card" style={{
               position: 'absolute',
               top: '-15px',
@@ -105,10 +112,10 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
               boxShadow: 'var(--shadow-md)',
               backgroundColor: 'rgba(255, 255, 255, 0.95)'
             }}>
-              <ShieldCheck size={26} color="var(--sage-600)" />
+              <ShieldCheck size={26} color="var(--plum-600)" />
               <div>
-                <div style={{ fontSize: '0.74rem', color: 'var(--charcoal-500)', fontWeight: 600 }}>SIPB Resmi Kemenkes</div>
-                <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--charcoal-900)' }}>Praktik Mandiri Sah</div>
+                <div style={{ fontSize: '0.74rem', color: 'var(--charcoal-500)', fontWeight: 600 }}>Tim Bidan Resmi</div>
+                <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--charcoal-900)' }}>Berlisensi & Berpengalaman</div>
               </div>
             </div>
           </div>
@@ -117,11 +124,11 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
           <div>
             
             <div style={{ marginBottom: '20px' }}>
-              <span className="badge badge-sage" style={{ marginBottom: '12px' }}>
-                14+ Tahun Pengabdian Kebidanan
+              <span className="badge badge-plum" style={{ marginBottom: '12px' }}>
+                Terbukti Bermanfaat untuk Ribuan Mama & Si Kecil
               </span>
-              <h3 style={{ fontSize: '1.8rem', color: 'var(--charcoal-900)', marginBottom: '12px' }}>
-                {PRACTITIONER_DATA.shortName}
+              <h3 style={{ fontSize: '1.75rem', color: 'var(--charcoal-900)', marginBottom: '12px' }}>
+                {PRACTITIONER_DATA.name}
               </h3>
               <p style={{ fontSize: '1.02rem', color: 'var(--charcoal-700)', lineHeight: 1.7, marginBottom: '20px' }}>
                 {PRACTITIONER_DATA.bio}
@@ -130,14 +137,14 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
 
             {/* Quote / Philosophy Box */}
             <div style={{
-              backgroundColor: 'var(--sand-50)',
-              borderLeft: '4px solid var(--sage-600)',
+              backgroundColor: 'var(--plum-50)',
+              borderLeft: '4px solid var(--plum-600)',
               padding: '20px',
               borderRadius: '0 16px 16px 0',
               marginBottom: '28px'
             }}>
               <div style={{ display: 'flex', gap: '10px', alignItems: 'start' }}>
-                <Quote size={24} color="var(--sage-600)" style={{ flexShrink: 0, opacity: 0.6 }} />
+                <Quote size={24} color="var(--plum-600)" style={{ flexShrink: 0, opacity: 0.6 }} />
                 <p style={{ 
                   fontFamily: 'var(--font-serif)', 
                   fontStyle: 'italic', 
@@ -153,51 +160,48 @@ export const PractitionerProfile: React.FC<PractitionerProfileProps> = ({ onOpen
             {/* Certifications List */}
             <div style={{ marginBottom: '28px' }}>
               <div style={{ fontSize: '0.88rem', fontWeight: 700, color: 'var(--charcoal-900)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                Sertifikasi & Pelatihan Khusus:
+                Keahlian & Keunggulan Layanan:
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '10px' }}>
                 {PRACTITIONER_DATA.certifications.map((cert, cIdx) => (
                   <div key={cIdx} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.86rem', color: 'var(--charcoal-700)' }}>
-                    <CheckCircle2 size={16} color="var(--sage-600)" style={{ flexShrink: 0 }} />
+                    <CheckCircle2 size={16} color="var(--plum-600)" style={{ flexShrink: 0 }} />
                     <span>{cert}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Books & Media Section */}
+            {/* Location and Instagram Info */}
             <div style={{
               paddingTop: '20px',
               borderTop: '1px solid var(--border-light)',
               display: 'flex',
               flexWrap: 'wrap',
-              gap: '20px'
+              gap: '20px',
+              alignItems: 'center',
+              justifyContent: 'space-between'
             }}>
-              <div style={{ flex: '1 1 200px' }}>
-                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--sand-800)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
-                  <BookOpen size={16} />
-                  <span>Buku Karya Bidan:</span>
+              <div>
+                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--plum-800)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px' }}>
+                  <MapPin size={16} />
+                  <span>Jangkauan Wilayah Homecare:</span>
                 </div>
                 <div style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--charcoal-800)' }}>
-                  "Lahir dengan Senyuman"
-                </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--charcoal-500)' }}>
-                  Gramedia Bestseller (Cetakan ke-7)
+                  Bandung, Cimahi, KBB & Jabodetabek
                 </div>
               </div>
 
-              <div style={{ flex: '1 1 200px' }}>
-                <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--sand-800)', display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
-                  <Tv size={16} />
-                  <span>Liputan Media:</span>
-                </div>
-                <div style={{ fontSize: '0.88rem', fontWeight: 600, color: 'var(--charcoal-800)' }}>
-                  Kompas TV, DetikHealth & IBI
-                </div>
-                <div style={{ fontSize: '0.78rem', color: 'var(--charcoal-500)' }}>
-                  Narasumber Nasional Gentle Birth
-                </div>
-              </div>
+              <a 
+                href={CLINIC_INFO.instagramUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="btn btn-secondary btn-sm"
+                style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
+              >
+                <InstagramIcon size={16} color="var(--plum-700)" />
+                <span>Follow @miiandmaa.dailyhomecare</span>
+              </a>
             </div>
 
           </div>

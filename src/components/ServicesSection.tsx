@@ -3,21 +3,19 @@ import {
   Clock, 
   MapPin, 
   CheckCircle2, 
-  Calendar, 
   Sparkles,
-  GraduationCap,
-  Stethoscope,
-  Heart
+  Baby,
+  Heart,
+  Stethoscope
 } from 'lucide-react';
 import { SERVICES_DATA } from '../data/content';
 
 interface ServicesSectionProps {
   onOpenBooking: (serviceId: string) => void;
-  selectedCategoryProp?: string;
 }
 
 export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking }) => {
-  const [activeTab, setActiveTab] = useState<'all' | 'class' | 'clinic' | 'doula'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'baby' | 'mom' | 'medical'>('all');
 
   const filteredServices = activeTab === 'all' 
     ? SERVICES_DATA 
@@ -37,18 +35,18 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
         {/* Section Header */}
         <div className="section-header">
           <div className="section-tag">
-            <GraduationCap size={16} />
+            <Heart size={16} />
             <span>Layanan Kami</span>
           </div>
           <h2 className="section-title">
-            Pilihan Program Daily Homecare, Kelas & Pendampingan Persalinan
+            Perawatan Lengkap Mom & Baby Spa Langsung di Rumah Anda
           </h2>
           <p className="section-subtitle">
-            Pilih program yang paling sesuai dengan kebutuhan Anda dan buah hati, mulai dari asuhan nifas di rumah, edukasi prenatal, yoga relaksasi, hingga pendampingan persalinan personal.
+            Seluruh tindakan ditangani langsung oleh Tim Bidan Berkompeten dan Berpengalaman dengan membawa peralatan steril dan minyak alami khusus.
           </p>
         </div>
 
-        {/* Tab Filters */}
+        {/* Tab Filters aligned with Instagram categories */}
         <div style={{
           display: 'flex',
           justifyContent: 'center',
@@ -65,30 +63,30 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
           </button>
 
           <button 
-            onClick={() => setActiveTab('class')}
-            className={`btn btn-sm ${activeTab === 'class' ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setActiveTab('baby')}
+            className={`btn btn-sm ${activeTab === 'baby' ? 'btn-primary' : 'btn-secondary'}`}
             style={{ borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', gap: '6px' }}
           >
-            <GraduationCap size={16} />
-            <span>Kelas & Workshop Edukasi</span>
+            <Baby size={16} />
+            <span>Baby & Kids Spa</span>
           </button>
 
           <button 
-            onClick={() => setActiveTab('clinic')}
-            className={`btn btn-sm ${activeTab === 'clinic' ? 'btn-primary' : 'btn-secondary'}`}
-            style={{ borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', gap: '6px' }}
-          >
-            <Stethoscope size={16} />
-            <span>Daily Homecare & Klinik</span>
-          </button>
-
-          <button 
-            onClick={() => setActiveTab('doula')}
-            className={`btn btn-sm ${activeTab === 'doula' ? 'btn-primary' : 'btn-secondary'}`}
+            onClick={() => setActiveTab('mom')}
+            className={`btn btn-sm ${activeTab === 'mom' ? 'btn-primary' : 'btn-secondary'}`}
             style={{ borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', gap: '6px' }}
           >
             <Heart size={16} />
-            <span>Pendampingan Doula 24/7</span>
+            <span>Mom Care (Hamil, Nifas & Laktasi)</span>
+          </button>
+
+          <button 
+            onClick={() => setActiveTab('medical')}
+            className={`btn btn-sm ${activeTab === 'medical' ? 'btn-primary' : 'btn-secondary'}`}
+            style={{ borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', gap: '6px' }}
+          >
+            <Stethoscope size={16} />
+            <span>Layanan Medis & Parenting</span>
           </button>
         </div>
 
@@ -189,7 +187,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                   {/* Benefits Checkmarks */}
                   <div style={{ marginBottom: '24px' }}>
                     <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--charcoal-800)', marginBottom: '10px', textTransform: 'uppercase' }}>
-                      Materi & Manfaat Layanan:
+                      Fasilitas & Keunggulan Layanan:
                     </div>
                     <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                       {service.benefits.map((benefit, bIdx) => (
@@ -200,25 +198,6 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                       ))}
                     </ul>
                   </div>
-
-                  {/* Schedule if exists */}
-                  {service.schedule && (
-                    <div style={{
-                      backgroundColor: 'var(--sand-50)',
-                      padding: '10px 14px',
-                      borderRadius: 'var(--radius-sm)',
-                      fontSize: '0.82rem',
-                      color: 'var(--charcoal-600)',
-                      marginBottom: '20px',
-                      border: '1px solid var(--border-warm)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '8px'
-                    }}>
-                      <Calendar size={15} color="var(--plum-700)" />
-                      <span>{service.schedule}</span>
-                    </div>
-                  )}
 
                 </div>
 

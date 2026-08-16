@@ -6,7 +6,7 @@ import {
   ShieldCheck, 
   Phone,
   MessageCircle,
-  HelpCircle
+  Gift
 } from 'lucide-react';
 import { PRICING_PACKAGES, CLINIC_INFO } from '../data/content';
 
@@ -30,13 +30,13 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
         <div className="section-header">
           <div className="section-tag" style={{ backgroundColor: 'var(--plum-50)', color: 'var(--plum-700)', borderColor: 'var(--border-plum)' }}>
             <CreditCard size={16} />
-            <span>Paket Biaya Layanan</span>
+            <span>Paket Bundling Lebih Untung</span>
           </div>
           <h2 className="section-title">
-            Investasi Transparan untuk Kesehatan Ibu & Buah Hati
+            Pilihan Paket Perawatan Mama & Si Kecil di Rumah
           </h2>
           <p className="section-subtitle">
-            Pilih paket asuhan Daily Homecare dan pendampingan persalinan yang paling sesuai dengan kebutuhan keluarga Anda di rumah.
+            Dapatkan harga lebih hemat dan bonus treatment gratis dengan memilih Paket Bundling Kunjungan Homecare Bidan (Tersedia Paket 3 Hari, 5 Hari, & 7 Hari).
           </p>
         </div>
 
@@ -89,7 +89,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
               <div>
                 {/* Header info */}
                 <div style={{ marginBottom: '16px', marginTop: pkg.badge ? '8px' : '0' }}>
-                  <h3 style={{ fontSize: '1.35rem', color: 'var(--charcoal-900)', marginBottom: '6px' }}>
+                  <h3 style={{ fontSize: '1.3rem', color: 'var(--charcoal-900)', marginBottom: '6px' }}>
                     {pkg.name}
                   </h3>
                   <p style={{ fontSize: '0.84rem', color: 'var(--charcoal-600)', lineHeight: 1.5, minHeight: '38px' }}>
@@ -105,14 +105,9 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
                   marginBottom: '20px'
                 }}>
                   <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                    <span style={{ fontSize: '1.9rem', fontWeight: 800, color: 'var(--plum-800)', fontFamily: 'var(--font-sans)' }}>
+                    <span style={{ fontSize: '1.4rem', fontWeight: 800, color: 'var(--plum-800)', fontFamily: 'var(--font-sans)' }}>
                       {pkg.price}
                     </span>
-                    {pkg.originalPrice && (
-                      <span style={{ fontSize: '0.9rem', textDecoration: 'line-through', color: 'var(--charcoal-400)' }}>
-                        {pkg.originalPrice}
-                      </span>
-                    )}
                   </div>
                   <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-500)', marginTop: '2px' }}>
                     {pkg.period}
@@ -136,7 +131,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
                 {/* Inclusions Feature List */}
                 <div style={{ marginBottom: '28px' }}>
                   <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--charcoal-800)', marginBottom: '12px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                    Fasilitas & Asuhan Termasuk:
+                    Kombinasi Tindakan Termasuk:
                   </div>
                   <ul style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {pkg.features.map((feat, fIdx) => (
@@ -157,7 +152,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
                   style={{ width: '100%', padding: '14px', fontSize: '0.98rem', cursor: 'pointer', justifyContent: 'center' }}
                 >
                   <Sparkles size={16} />
-                  <span>Pilih {pkg.name}</span>
+                  <span>Konsultasi {pkg.name}</span>
                 </button>
               </div>
 
@@ -165,12 +160,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
           ))}
         </div>
 
-        {/* Pricing Guarantee & Transparency Trust Banner */}
+        {/* Pricing Guarantee & Instagram Promotion Trust Banner */}
         <div style={{
-          backgroundColor: 'var(--sand-50)',
-          borderRadius: '20px',
-          padding: '24px 32px',
-          border: '1px solid var(--border-warm)',
+          backgroundColor: 'var(--plum-50)',
+          borderRadius: '24px',
+          padding: '32px',
+          border: '1px solid var(--border-plum)',
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
           gap: '24px',
@@ -178,11 +173,31 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
             <div style={{
-              width: '44px',
-              height: '44px',
+              width: '46px',
+              height: '46px',
               borderRadius: '50%',
-              backgroundColor: 'var(--plum-100)',
-              color: 'var(--plum-700)',
+              backgroundColor: 'var(--plum-200)',
+              color: 'var(--plum-800)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0
+            }}>
+              <Gift size={24} />
+            </div>
+            <div>
+              <div style={{ fontSize: '0.96rem', fontWeight: 700, color: 'var(--plum-900)' }}>Dapatkan Free Treatment</div>
+              <div style={{ fontSize: '0.82rem', color: 'var(--charcoal-600)' }}>Bonus perawatan ekstra untuk pemesanan paket sebelum kelahiran si kecil.</div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+            <div style={{
+              width: '46px',
+              height: '46px',
+              borderRadius: '50%',
+              backgroundColor: 'var(--plum-200)',
+              color: 'var(--plum-800)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -191,28 +206,8 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
               <ShieldCheck size={24} />
             </div>
             <div>
-              <div style={{ fontSize: '0.94rem', fontWeight: 700, color: 'var(--charcoal-900)' }}>Tanpa Biaya Tersembunyi</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-600)' }}>Harga sudah termasuk alat steril & bahan herbal berkualitas.</div>
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{
-              width: '44px',
-              height: '44px',
-              borderRadius: '50%',
-              backgroundColor: 'var(--plum-100)',
-              color: 'var(--plum-700)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0
-            }}>
-              <MessageCircle size={24} />
-            </div>
-            <div>
-              <div style={{ fontSize: '0.94rem', fontWeight: 700, color: 'var(--charcoal-900)' }}>Jadwal Kunjungan Fleksibel</div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--charcoal-600)' }}>Dapat dijadwalkan ulang (*reschedule*) tanpa biaya tambahan.</div>
+              <div style={{ fontSize: '0.96rem', fontWeight: 700, color: 'var(--plum-900)' }}>Jadwal Kunjungan Fleksibel</div>
+              <div style={{ fontSize: '0.82rem', color: 'var(--charcoal-600)' }}>Daftar via WhatsApp H-1 untuk menyesuaikan waktu tidur si kecil.</div>
             </div>
           </div>
 
@@ -221,11 +216,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onOpenBooking })
               href={CLINIC_INFO.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-whatsapp btn-sm"
+              className="btn btn-whatsapp"
               style={{ width: '100%', justifyContent: 'center' }}
             >
               <Phone size={16} />
-              <span>Tanya Ketersediaan Jadwal</span>
+              <span>Daftar via WhatsApp H-1</span>
             </a>
           </div>
         </div>
