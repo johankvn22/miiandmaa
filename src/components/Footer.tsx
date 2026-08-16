@@ -4,7 +4,7 @@ import {
   Phone, 
   Clock, 
   ShieldCheck, 
-  Sparkles
+  MessageCircle
 } from 'lucide-react';
 import { CLINIC_INFO, PRACTITIONER_DATA } from '../data/content';
 
@@ -24,68 +24,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
   return (
     <footer style={{ backgroundColor: 'var(--charcoal-900)', color: '#FFFFFF', position: 'relative' }}>
       
-      {/* Bottom CTA Banner Section */}
-      <div style={{
-        paddingTop: '64px',
-        paddingBottom: '32px',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
-      }}>
-        <div className="container">
-          <div style={{
-            background: 'linear-gradient(135deg, #7A2350 0%, #46142C 100%)',
-            borderRadius: '24px',
-            padding: '44px 36px',
-            boxShadow: '0 16px 36px rgba(0, 0, 0, 0.3)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-            gap: '32px',
-            alignItems: 'center'
-          }}>
-            <div>
-              <span className="badge" style={{ backgroundColor: 'rgba(255, 255, 255, 0.18)', color: '#FFFFFF', marginBottom: '14px' }}>
-                mii and maa • Daily Homecare Terpercaya
-              </span>
-              <h2 style={{ color: '#FFFFFF', fontSize: 'clamp(1.8rem, 3vw, 2.3rem)', lineHeight: 1.25, marginBottom: '14px' }}>
-                Jasa Perawatan Mama dan Si Kecil Kapan Saja & Di Mana Saja
-              </h2>
-              <p style={{ color: 'rgba(255, 255, 255, 0.88)', fontSize: '1.02rem', lineHeight: 1.65 }}>
-                Tanpa harus keluar rumah. Jadwalkan kunjungan Mom & Baby Spa, Breast Care, atau Pijat Nifas bersama tim bidan mii and maa sekarang (Daftar via WhatsApp H-1).
-              </p>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px', alignItems: 'start', justifySelf: 'start', width: '100%', maxWidth: '340px' }}>
-              <button 
-                onClick={onOpenBooking}
-                className="btn btn-terracotta btn-lg"
-                style={{ width: '100%', cursor: 'pointer' }}
-              >
-                <Sparkles size={18} />
-                <span>Jadwalkan Homecare Sekarang</span>
-              </button>
-
-              <a 
-                href={CLINIC_INFO.whatsappUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="btn btn-secondary btn-lg"
-                style={{ 
-                  width: '100%', 
-                  backgroundColor: 'rgba(255, 255, 255, 0.15)', 
-                  color: '#FFFFFF', 
-                  border: '1px solid rgba(255, 255, 255, 0.25)' 
-                }}
-              >
-                <Phone size={18} />
-                <span>Chat WhatsApp (0811-2037-714)</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer Body */}
-      <div style={{ paddingTop: '56px', paddingBottom: '60px' }}>
+      {/* Main Clean Footer Body */}
+      <div style={{ paddingTop: '64px', paddingBottom: '48px' }}>
         <div className="container">
           
           <div style={{
@@ -99,8 +39,8 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '14px', marginBottom: '16px' }}>
                 <div style={{
-                  width: '46px',
-                  height: '46px',
+                  width: '48px',
+                  height: '48px',
                   borderRadius: '50%',
                   overflow: 'hidden',
                   backgroundColor: '#FFFFFF',
@@ -110,20 +50,20 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
                   <img src="/logo.png" alt="mii and maa Logo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: 'var(--font-script)', fontSize: '1.75rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1 }}>
+                  <div style={{ fontFamily: 'var(--font-script)', fontSize: '1.85rem', fontWeight: 700, color: '#FFFFFF', lineHeight: 1 }}>
                     mii and maa
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: 'var(--plum-300)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                  <div style={{ fontSize: '0.74rem', color: 'var(--plum-300)', textTransform: 'uppercase', letterSpacing: '0.12em', marginTop: '2px' }}>
                     DAILY HOMECARE
                   </div>
                 </div>
               </div>
 
-              <p style={{ fontSize: '0.88rem', color: 'rgba(255, 255, 255, 0.72)', lineHeight: 1.65, marginBottom: '20px' }}>
-                Pelayanan kesehatan ibu dan anak oleh Tim Bidan Berkompeten & Berpengalaman. Layanan Baby Spa, Pijat Hamil, Nifas, Laktasi, Kelas Parenting, dan Jasa Infus ke rumah.
+              <p style={{ fontSize: '0.88rem', color: 'rgba(255, 255, 255, 0.72)', lineHeight: 1.65, marginBottom: '16px' }}>
+                Pelayanan kesehatan ibu dan anak oleh Tim Bidan Berkompeten & Berpengalaman. Layanan Baby Spa, Pijat Hamil, Nifas, Laktasi, Kelas Parenting, dan Jasa Infus langsung ke rumah Anda.
               </p>
 
-              <div style={{ fontSize: '0.82rem', color: 'var(--gold-accent)' }}>
+              <div style={{ fontSize: '0.85rem', color: 'var(--gold-accent)', fontWeight: 600 }}>
                 Dipimpin oleh {PRACTITIONER_DATA.name}
               </div>
               <div style={{ fontSize: '0.82rem', color: 'rgba(255, 255, 255, 0.7)', marginTop: '4px' }}>
@@ -133,10 +73,10 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
             {/* Column 2: Navigation Links */}
             <div>
-              <h4 style={{ color: '#FFFFFF', fontSize: '1.1rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
+              <h4 style={{ color: '#FFFFFF', fontSize: '1.08rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
                 Navigasi Utama
               </h4>
-              <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.94rem', color: 'rgba(255, 255, 255, 0.8)' }}>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.92rem', color: 'rgba(255, 255, 255, 0.8)' }}>
                 <li><a href="#home" style={{ transition: 'color 0.2s' }}>Home</a></li>
                 <li><a href="#layanan" style={{ transition: 'color 0.2s' }}>Layanan Mom & Baby Spa</a></li>
                 <li><a href="#pricing" style={{ transition: 'color 0.2s' }}>Paket Bundling Lebih Untung</a></li>
@@ -147,7 +87,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
             {/* Column 3: Contact & Operational */}
             <div>
-              <h4 style={{ color: '#FFFFFF', fontSize: '1.1rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
+              <h4 style={{ color: '#FFFFFF', fontSize: '1.08rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
                 Kontak & Jangkauan Layanan
               </h4>
               
@@ -159,7 +99,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                   <Phone size={18} color="var(--plum-300)" style={{ flexShrink: 0 }} />
-                  <span>{CLINIC_INFO.phone} (WhatsApp H-1)</span>
+                  <span>{CLINIC_INFO.phone}</span>
                 </div>
 
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
@@ -181,31 +121,38 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </div>
             </div>
 
-            {/* Column 4: WhatsApp Hotline & Trust Note */}
+            {/* Column 4: WhatsApp Reservasi Box */}
             <div>
-              <h4 style={{ color: '#FFFFFF', fontSize: '1.1rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
-                Reservasi Kunjungan Homecare
+              <h4 style={{ color: '#FFFFFF', fontSize: '1.08rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
+                Reservasi Homecare Bidan
               </h4>
 
               <div style={{
                 backgroundColor: 'rgba(255, 255, 255, 0.08)',
-                padding: '20px',
-                borderRadius: '16px',
+                padding: '22px',
+                borderRadius: '18px',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
                 marginBottom: '16px'
               }}>
-                <div style={{ fontSize: '0.8rem', color: 'var(--gold-accent)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '4px' }}>
-                  WhatsApp Resmi mii and maa
+                <div style={{ fontSize: '0.78rem', color: 'var(--gold-accent)', fontWeight: 700, textTransform: 'uppercase', marginBottom: '4px' }}>
+                  WhatsApp Resmi (Daftar H-1)
                 </div>
-                <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#FFFFFF', marginBottom: '8px' }}>
+                <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#FFFFFF', marginBottom: '12px' }}>
                   0811-2037-714
                 </div>
-                <div style={{ fontSize: '0.78rem', color: 'rgba(255, 255, 255, 0.7)' }}>
-                  Daftar via WhatsApp H-1 untuk jadwal kunjungan bidan ke rumah Anda.
-                </div>
+                <a 
+                  href={CLINIC_INFO.whatsappUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="btn btn-whatsapp btn-sm"
+                  style={{ width: '100%', justifyContent: 'center' }}
+                >
+                  <MessageCircle size={16} />
+                  <span>Chat Admin WhatsApp</span>
+                </a>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'rgba(255, 255, 255, 0.6)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.78rem', color: 'rgba(255, 255, 255, 0.65)' }}>
                 <ShieldCheck size={16} color="var(--plum-300)" />
                 <span>Ditangani Bidan Berkompeten & Berpengalaman</span>
               </div>
@@ -215,7 +162,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
 
           {/* Medical Disclaimer & Copyright */}
           <div style={{
-            paddingTop: '32px',
+            paddingTop: '28px',
             borderTop: '1px solid rgba(255, 255, 255, 0.12)',
             fontSize: '0.8rem',
             color: 'rgba(255, 255, 255, 0.55)',
