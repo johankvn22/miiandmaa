@@ -16,7 +16,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
     <section 
       id="home" 
       style={{
-        paddingTop: '130px',
+        paddingTop: '120px',
         paddingBottom: '80px',
         background: 'radial-gradient(ellipse at top left, rgba(248, 226, 236, 0.6) 0%, rgba(252, 250, 248, 1) 55%, rgba(243, 248, 245, 0.7) 100%)',
         position: 'relative',
@@ -58,31 +58,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
           
           {/* Left Column: Copywriting & CTAs */}
           <div>
-            
-            {/* Medical Authority & Trust Badge */}
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              backgroundColor: 'var(--plum-50)',
-              border: '1px solid var(--border-plum)',
-              padding: '6px 18px',
-              borderRadius: 'var(--radius-full)',
-              marginBottom: '20px',
-              boxShadow: 'var(--shadow-sm)'
-            }}>
-              <span style={{
-                display: 'inline-block',
-                width: '8px',
-                height: '8px',
-                borderRadius: '50%',
-                backgroundColor: 'var(--plum-600)',
-                animation: 'pulseGlow 2s infinite'
-              }} />
-              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--plum-800)', letterSpacing: '0.02em' }}>
-                mii and maa • Daily Homecare & Gentle Birth Berlisensi Resmi
-              </span>
-            </div>
 
             {/* Main Headline */}
             <h1 style={{ 

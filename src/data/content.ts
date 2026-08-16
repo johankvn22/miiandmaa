@@ -15,6 +15,28 @@ export interface ServiceItem {
   image: string;
 }
 
+export interface PricingPackage {
+  id: string;
+  name: string;
+  tagline: string;
+  price: string;
+  originalPrice?: string;
+  period: string;
+  badge?: string;
+  popular?: boolean;
+  features: string[];
+  notIncluded?: string[];
+  target: string;
+}
+
+export interface PainPointItem {
+  icon: string;
+  fear: string;
+  fearDesc: string;
+  solution: string;
+  solutionDesc: string;
+}
+
 export interface BirthStory {
   id: string;
   motherName: string;
@@ -80,6 +102,112 @@ export const CLINIC_INFO = {
   ]
 };
 
+export const PRICING_PACKAGES: PricingPackage[] = [
+  {
+    id: 'single-homecare',
+    name: 'Paket Single Visit',
+    tagline: 'Kunjungan tunggal untuk penanganan masalah laktasi dan evaluasi nifas.',
+    price: 'Rp 450.000',
+    period: '/ 1x Kunjungan (90 Menit)',
+    target: 'Cocok untuk ibu yang butuh pertolongan cepat payudara bengkak atau rawat tali pusat.',
+    features: [
+      '1x Kunjungan Bidan Profesional ke Rumah (90 Menit)',
+      'Pijat Laktasi Lembut & Terapi Payudara Bengkak',
+      'Edukasi Pelekatan Mulut Bayi (Latch-on) Anti Lecet',
+      'Pemeriksaan Tali Pusat Steril & Skrining Ikterus (Kuning)',
+      'Evaluasi Pemulihan Luka Jahitan Perineum / Operasi SC',
+      'Konsultasi Gratis via WhatsApp selama 3 Hari'
+    ]
+  },
+  {
+    id: 'nifas-sehati-3x',
+    name: 'Paket Nifas Sehati (3x Visit)',
+    tagline: 'Pendampingan intensif masa awal nifas agar transisi menyusui lancar bebas stres.',
+    price: 'Rp 1.250.000',
+    originalPrice: 'Rp 1.350.000',
+    period: '/ 3x Kunjungan Homecare',
+    badge: 'Paling Populer ⭐',
+    popular: true,
+    target: 'Paling direkomendasikan untuk ibu baru pada minggu pertama kepulangan dari RS.',
+    features: [
+      '3x Kunjungan Homecare (Jadwal Fleksibel sesuai Kebutuhan)',
+      'Pijat Laktasi & Terapi Oksitosin di Setiap Kunjungan',
+      'Mandi Rempah Herbal Nifas & Pemasangan Bengkung Modern',
+      'Pijat Relaksasi Tubuh Ibu untuk Mencegah Postpartum Blues',
+      'Pijat Bayi Lembut (Infant Massage) Anti Kolik & Kembung',
+      'Pendampingan Praktik Memandikan Bayi Baru Lahir bagi Orang Tua',
+      'Konsultasi Privat WhatsApp 24/7 Selama Masa Nifas'
+    ]
+  },
+  {
+    id: 'golden-40-days',
+    name: 'Paket Golden 40 Days',
+    tagline: 'Perawatan holistik menyeluruh selama 40 hari masa pemulihan nifas ibu & tumbuh kembang bayi.',
+    price: 'Rp 2.800.000',
+    originalPrice: 'Rp 3.150.000',
+    period: '/ 7x Kunjungan Terjadwal',
+    badge: 'Paket Komprehensif ✨',
+    target: 'Asuhan paripurna dari minggu pertama hingga selesai masa nifas.',
+    features: [
+      '7x Kunjungan Homecare Terjadwal (H+1, H+3, H+7, H+14, H+21, H+30, H+40)',
+      'Perawatan Lengkap Pemulihan Rahim & Otot Panggul',
+      'Pendampingan ASI Eksklusif hingga Produksi Stabil & Lancar',
+      'Spa Bayi & Hydrotherapy Air Hangat Steril di Rumah',
+      'Stimulasi Sensori-Motorik & Senam Tumbuh Kembang Bayi',
+      'Bonus 1 Botol Minyak Pijat Almond Organik mii and maa (100ml)',
+      'Akses Prioritas Darurat Bidan 24 Jam'
+    ]
+  },
+  {
+    id: 'doula-persalinan',
+    name: 'Paket Doula & Gentle Birth',
+    tagline: 'Pendampingan persalinan personal tanpa panik sejak fase aktif kontraksi hingga IMD.',
+    price: 'Rp 3.500.000',
+    period: '/ Pendampingan Persalinan Penuh',
+    badge: 'Slot Terbatas 💖',
+    target: 'Untuk pasangan yang menginginkan persalinan minim trauma di RS/Klinik pilihan.',
+    features: [
+      '2x Kunjungan Prenatal Persiapan Fisik & Mental di Rumah',
+      'Penyusunan Lembar Rencana Persalinan (Birth Plan) Medis',
+      'Kesiagaan On-Call Bidan/Doula 24 Jam mulai Usia Kehamilan 37 Minggu',
+      'Pendampingan Fisik Langsung di RS (Pijat Counter-Pressure, Rebozo, Afirmasi)',
+      'Memandu Pasangan agar Menjadi Pelindung Terbaik bagi Ibu',
+      '1x Kunjungan Nifas & Evaluasi Laktasi Pasca Pulang ke Rumah'
+    ]
+  }
+];
+
+export const PAIN_POINTS: PainPointItem[] = [
+  {
+    icon: 'BrainCircuit',
+    fear: 'Ketakutan & Cemas Berlebih terhadap Rasa Sakit',
+    fearDesc: 'Banyak calon ibu merasa ngeri mendengar cerita kontraksi yang digambarkan begitu menyiksa dan tanpa kendali.',
+    solution: 'Filosofi Hypnobirthing & Relaksasi Gelombang',
+    solutionDesc: 'Kami mengajarkan bahwa rasa mulas adalah gelombang alami rahim yang membuka jalan lahir. Dengan teknik napas dan sugesti tenang, tubuh melepas endorfin yang meredakan sensasi tersebut secara alami.'
+  },
+  {
+    icon: 'FileText',
+    fear: 'Minim Pengetahuan Seputar Intervensi Medis',
+    fearDesc: 'Bingung saat dihadapkan pada opsi induksi, suntik oksitosin, atau episiotomi (pengguntingan perineum) tanpa tahu opsi alternatifnya.',
+    solution: 'Penyusunan Birth Plan Berbasis Bukti Medis',
+    solutionDesc: 'Kami membantu Anda menyusun Rencana Persalinan (Birth Plan) yang jelas, memahami indikasi medis yang sesungguhnya, serta melatih komunikasi asertif dan penuh rasa hormat dengan dokter kandungan.'
+  },
+  {
+    icon: 'HeartHandshake',
+    fear: 'Ayah / Pasangan Bingung Harus Berbuat Apa',
+    fearDesc: 'Seringkali suami hanya menjadi penonton yang cemas di ruang bersalin karena tidak dibekali keterampilan praktis mendampingi istri.',
+    solution: 'Pelatihan Praktis Peran "Birth Partner"',
+    solutionDesc: 'Di mii and maa, suami dilatih teknik counter-pressure pinggang, pijat panggul, penggunaan kain Rebozo, dan kata-kata afirmasi agar menjadi pelindung terbaik istri saat melahirkan.'
+  },
+  {
+    icon: 'Milk',
+    fear: 'Stres ASI Seret & Nifas yang Melelahkan',
+    fearDesc: 'Bingung mengatasi payudara bengkak, puting lecet berdarah, dan kelelahan mental merawat bayi baru lahir sendirian.',
+    solution: 'Pendampingan Laktasi Intensif & Daily Homecare',
+    solutionDesc: 'Bidan bersertifikasi konselor menyusui mendampingi Anda langsung di rumah, memastikan perlekatan yang nyaman, serta memulihkan stamina ibu melalui asuhan nifas holistik.'
+  }
+];
+
 export const PRACTITIONER_DATA = {
   name: 'Bidan Annisa Larasati, S.Tr.Keb, Bdn, C.Ht, CPM',
   shortName: 'Bidan Annisa',
@@ -128,7 +256,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     tagline: 'Perawatan nifas terpadu di rumah Anda: atasi ASI tersumbat, rawat tali pusat, dan pulihkan stamina ibu.',
     duration: '90 Menit / Kunjungan',
     mode: 'Homecare / RS',
-    price: 'Rp 450.000',
+    price: 'Konsultasi Sekarang',
     badge: 'Paling Diminati 🐘',
     benefits: [
       'Pijat payudara laktasi lembut untuk mengatasi payudara bengkak / mastitis',
@@ -149,8 +277,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     tagline: 'Bekali diri dan pasangan untuk persalinan yang terencana, tenang, dan memberdayakan.',
     duration: '2 Hari (Total 6 Jam)',
     mode: 'Offline & Online',
-    price: 'Rp 650.000',
-    originalPrice: 'Rp 850.000',
+    price: 'Konsultasi Sekarang',
     badge: 'Workshop Terfavorit ⭐',
     benefits: [
       'Pemahaman fisiologi kontraksi & gelombang rahim tanpa panik',
@@ -171,8 +298,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     tagline: 'Pelepasan ketakutan batin, pemulihan fleksibilitas panggul, dan koneksi batin ibu-janin.',
     duration: '75 Menit / Sesi',
     mode: 'Offline & Online',
-    price: 'Rp 175.000',
-    originalPrice: 'Rp 225.000',
+    price: 'Konsultasi Sekarang',
     badge: 'Rutin Setiap Pekan',
     benefits: [
       'Afirmasi positif bawah sadar untuk melenyapkan rasa takut',
@@ -193,7 +319,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     tagline: 'Pemeriksaan kehamilan humanis 45-60 menit tanpa terburu-buru, penuh ruang diskusi.',
     duration: '45 - 60 Menit',
     mode: 'Klinik Fisik',
-    price: 'Rp 250.000',
+    price: 'Konsultasi Sekarang',
     badge: 'Pemeriksaan Humanis',
     benefits: [
       'Pemeriksaan Leopold lengkap, tinggi fundus, dan detak jantung janin (Doppler)',
@@ -214,7 +340,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     tagline: 'Pendampingan berkelanjutan sejak masa aktif kontraksi hingga inisiasi menyusu dini.',
     duration: 'On-Call 24 Jam sejak UK 37 Minggu',
     mode: 'Homecare / RS',
-    price: 'Rp 3.500.000',
+    price: 'Konsultasi Sekarang',
     badge: 'Slot Terbatas (3 Pasien/Bulan)',
     benefits: [
       'Kesiagaan on-call 24 jam mulai usia kehamilan 37 minggu',
@@ -235,8 +361,7 @@ export const SERVICES_DATA: ServiceItem[] = [
     tagline: 'Stimulasi sensori-motorik, redakan kolik perut, dan tingkatkan kualitas tidur bayi.',
     duration: '60 Menit',
     mode: 'Homecare / RS',
-    price: 'Rp 185.000',
-    originalPrice: 'Rp 230.000',
+    price: 'Konsultasi Sekarang',
     benefits: [
       'Pijat tubuh bayi lembut dengan minyak alami organik (food grade)',
       'Terapi senam bayi (baby gym) untuk koordinasi motorik kasar',
@@ -247,37 +372,6 @@ export const SERVICES_DATA: ServiceItem[] = [
     description: 'Terapi relaksasi khusus bayi usia 1 bulan hingga 2 tahun yang ditangani langsung oleh bidan terlatih bersertifikasi International Association of Infant Massage (IAIM).',
     schedule: 'Senin - Minggu: 09.00 - 17.00 WIB',
     image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=800&q=80'
-  }
-];
-
-export const PAIN_POINTS = [
-  {
-    icon: 'BrainCircuit',
-    fear: 'Ketakutan & Cemas Berlebih terhadap Rasa Sakit',
-    fearDesc: 'Banyak calon ibu merasa ngeri mendengar cerita kontraksi yang digambarkan begitu menyiksa dan tanpa kendali.',
-    solution: 'Filosofi Hypnobirthing & Relaksasi Gelombang',
-    solutionDesc: 'Kami mengajarkan bahwa rasa mulas adalah gelombang alami rahim yang membuka jalan lahir. Dengan teknik napas dan sugesti tenang, tubuh melepas endorfin yang meredakan sensasi tersebut secara alami.'
-  },
-  {
-    icon: 'FileText',
-    fear: 'Minim Pengetahuan Seputar Intervensi Medis',
-    fearDesc: 'Bingung saat dihadapkan pada opsi induksi, suntik oksitosin, atau episiotomi (pengguntingan perineum) tanpa tahu opsi alternatifnya.',
-    solution: 'Penyusunan Birth Plan Berbasis Bukti Medis',
-    solutionDesc: 'Kami membantu Anda menyusun Rencana Persalinan (Birth Plan) yang jelas, memahami indikasi medis yang sesungguhnya, serta melatih komunikasi asertif dan penuh rasa hormat dengan dokter kandungan.'
-  },
-  {
-    icon: 'HeartHandshake',
-    fear: 'Ayah / Pasangan Bingung Harus Berbuat Apa',
-    fearDesc: 'Seringkali suami hanya menjadi penonton yang cemas di ruang bersalin karena tidak dibekali keterampilan praktis mendampingi istri.',
-    solution: 'Pelatihan Praktis Peran "Birth Partner"',
-    solutionDesc: 'Di mii and maa, suami dilatih teknik counter-pressure pinggang, pijat panggul, penggunaan kain Rebozo, dan kata-kata afirmasi agar menjadi pelindung terbaik istri saat melahirkan.'
-  },
-  {
-    icon: 'Milk',
-    fear: 'Stres ASI Seret & Nifas yang Melelahkan',
-    fearDesc: 'Bingung mengatasi payudara bengkak, puting lecet berdarah, dan kelelahan mental merawat bayi baru lahir sendirian.',
-    solution: 'Pendampingan Laktasi Intensif & Daily Homecare',
-    solutionDesc: 'Bidan bersertifikasi konselor menyusui mendampingi Anda langsung di rumah, memastikan perlekatan yang nyaman, serta memulihkan stamina ibu melalui asuhan nifas holistik.'
   }
 ];
 

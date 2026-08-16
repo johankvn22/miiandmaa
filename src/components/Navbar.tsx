@@ -29,6 +29,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
   const navLinks = [
     { label: 'Home', href: '#home' },
     { label: 'Layanan Kami', href: '#layanan' },
+    { label: 'Pricing', href: '#pricing' },
     { label: 'Artikel', href: '#artikel' },
     { label: 'About Us', href: '#about-us' }
   ];
@@ -119,14 +120,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenBooking }) => {
 
         {/* Desktop Navigation Links */}
         <nav style={{ display: 'none' }} className="desktop-nav">
-          <ul style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+          <ul style={{ display: 'flex', alignItems: 'center', gap: '28px' }}>
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a 
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
                   style={{
-                    fontSize: '1rem',
+                    fontSize: '0.98rem',
                     fontWeight: 600,
                     color: 'var(--charcoal-800)',
                     transition: 'color 0.2s',

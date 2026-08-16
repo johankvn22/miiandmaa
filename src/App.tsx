@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ServicesSection } from './components/ServicesSection';
+import { PricingSection } from './components/PricingSection';
 import { KnowledgeCenter } from './components/KnowledgeCenter';
 import { PractitionerProfile } from './components/PractitionerProfile';
 import { BirthStories } from './components/BirthStories';
@@ -26,7 +27,7 @@ export function App() {
 
   return (
     <div className="min-h-screen" style={{ position: 'relative' }}>
-      {/* 1. Header Navigation (Home, Layanan Kami, Artikel, About Us) */}
+      {/* 1. Header Navigation */}
       <Navbar 
         onOpenBooking={handleOpenBooking} 
       />
@@ -41,13 +42,18 @@ export function App() {
         onOpenBooking={handleOpenBooking} 
       />
 
-      {/* ================= SECTION 3: ARTIKEL (ARTICLE) ================= */}
+      {/* ================= SECTION 3: PRICING (PAKET BIAYA) ================= */}
+      <PricingSection 
+        onOpenBooking={handleOpenBooking} 
+      />
+
+      {/* ================= SECTION 4: ARTIKEL (ARTICLE) ================= */}
       <KnowledgeCenter 
         onOpenArticle={(article) => setSelectedArticle(article)} 
         onOpenLeadMagnet={() => setIsLeadMagnetOpen(true)} 
       />
 
-      {/* ================= SECTION 4: ABOUT US ================= */}
+      {/* ================= SECTION 5: ABOUT US ================= */}
       <div id="about-section">
         {/* Founder & Practitioner Profile */}
         <PractitionerProfile 

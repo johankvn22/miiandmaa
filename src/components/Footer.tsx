@@ -17,7 +17,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
   return (
     <footer style={{ backgroundColor: 'var(--charcoal-900)', color: '#FFFFFF', position: 'relative' }}>
       
-      {/* Bottom CTA Banner Section (Clean document flow with no overlap) */}
+      {/* Bottom CTA Banner Section */}
       <div style={{
         paddingTop: '64px',
         paddingBottom: '32px',
@@ -124,14 +124,15 @@ export const Footer: React.FC<FooterProps> = ({ onOpenBooking }) => {
               </div>
             </div>
 
-            {/* Column 2: Navigation Links (Home, Layanan Kami, Artikel, About Us) */}
+            {/* Column 2: Navigation Links (Home, Layanan Kami, Pricing, Artikel, About Us) */}
             <div>
               <h4 style={{ color: '#FFFFFF', fontSize: '1.1rem', marginBottom: '18px', fontFamily: 'var(--font-sans)', fontWeight: 700 }}>
                 Navigasi Utama
               </h4>
               <ul style={{ display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.94rem', color: 'rgba(255, 255, 255, 0.8)' }}>
                 <li><a href="#home" style={{ transition: 'color 0.2s' }}>Home</a></li>
-                <li><a href="#layanan" style={{ transition: 'color 0.2s' }}>Layanan Kami (Daily Homecare & Kelas)</a></li>
+                <li><a href="#layanan" style={{ transition: 'color 0.2s' }}>Layanan Kami</a></li>
+                <li><a href="#pricing" style={{ transition: 'color 0.2s' }}>Pricing & Paket Biaya</a></li>
                 <li><a href="#artikel" style={{ transition: 'color 0.2s' }}>Artikel & Hospital Bag Checklist</a></li>
                 <li><a href="#about-us" style={{ transition: 'color 0.2s' }}>About Us & Profil Praktisi</a></li>
               </ul>

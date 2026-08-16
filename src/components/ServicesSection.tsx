@@ -4,7 +4,7 @@ import {
   MapPin, 
   CheckCircle2, 
   Calendar, 
-  ArrowRight,
+  Sparkles,
   GraduationCap,
   Stethoscope,
   Heart
@@ -41,10 +41,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
             <span>Layanan Kami</span>
           </div>
           <h2 className="section-title">
-            Pilihan Program Kelas Edukasi & Layanan Klinik Kebidanan
+            Pilihan Program Daily Homecare, Kelas & Pendampingan Persalinan
           </h2>
           <p className="section-subtitle">
-            Pilih program yang paling sesuai dengan kebutuhan Anda dan buah hati, mulai dari edukasi prenatal, yoga relaksasi, pemeriksaan klinis, hingga pendampingan persalinan personal.
+            Pilih program yang paling sesuai dengan kebutuhan Anda dan buah hati, mulai dari asuhan nifas di rumah, edukasi prenatal, yoga relaksasi, hingga pendampingan persalinan personal.
           </p>
         </div>
 
@@ -79,7 +79,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
             style={{ borderRadius: 'var(--radius-full)', display: 'flex', alignItems: 'center', gap: '6px' }}
           >
             <Stethoscope size={16} />
-            <span>Layanan Klinik & Homecare</span>
+            <span>Daily Homecare & Klinik</span>
           </button>
 
           <button 
@@ -126,7 +126,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                 <div style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'linear-gradient(to top, rgba(28, 38, 33, 0.6) 0%, transparent 60%)'
+                  background: 'linear-gradient(to top, rgba(34, 27, 32, 0.6) 0%, transparent 60%)'
                 }} />
 
                 {/* Badge Overlay */}
@@ -136,7 +136,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                     top: '16px',
                     left: '16px'
                   }}>
-                    <span className="badge badge-gold">
+                    <span className="badge badge-plum" style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', color: 'var(--plum-800)', border: '1px solid var(--plum-200)' }}>
                       {service.badge}
                     </span>
                   </div>
@@ -150,14 +150,14 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  backgroundColor: 'rgba(255, 255, 255, 0.92)',
+                  backgroundColor: 'rgba(255, 255, 255, 0.94)',
                   padding: '4px 12px',
                   borderRadius: 'var(--radius-full)',
                   fontSize: '0.8rem',
                   fontWeight: 600,
                   color: 'var(--charcoal-900)'
                 }}>
-                  <MapPin size={13} color="var(--sage-700)" />
+                  <MapPin size={13} color="var(--plum-700)" />
                   <span>{service.mode}</span>
                 </div>
               </div>
@@ -168,7 +168,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                   
                   {/* Category & Duration */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                    <span style={{ fontSize: '0.82rem', fontWeight: 600, color: 'var(--sage-700)', textTransform: 'uppercase' }}>
+                    <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--plum-700)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                       {service.categoryLabel}
                     </span>
                     <span style={{ fontSize: '0.82rem', color: 'var(--charcoal-500)', display: 'flex', alignItems: 'center', gap: '4px' }}>
@@ -189,12 +189,12 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                   {/* Benefits Checkmarks */}
                   <div style={{ marginBottom: '24px' }}>
                     <div style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--charcoal-800)', marginBottom: '10px', textTransform: 'uppercase' }}>
-                      Materi & Manfaat Utama:
+                      Materi & Manfaat Layanan:
                     </div>
                     <ul style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                       {service.benefits.map((benefit, bIdx) => (
                         <li key={bIdx} style={{ display: 'flex', alignItems: 'start', gap: '8px', fontSize: '0.86rem', color: 'var(--charcoal-700)' }}>
-                          <CheckCircle2 size={16} color="var(--sage-600)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                          <CheckCircle2 size={16} color="var(--plum-600)" style={{ flexShrink: 0, marginTop: '2px' }} />
                           <span>{benefit}</span>
                         </li>
                       ))}
@@ -215,43 +215,25 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({ onOpenBooking 
                       alignItems: 'center',
                       gap: '8px'
                     }}>
-                      <Calendar size={15} color="var(--sand-700)" />
+                      <Calendar size={15} color="var(--plum-700)" />
                       <span>{service.schedule}</span>
                     </div>
                   )}
 
                 </div>
 
-                {/* Footer of Card: Price & CTA */}
+                {/* Footer of Card: Clean Full Button 'Konsultasi Sekarang' (No Pricing) */}
                 <div style={{
                   paddingTop: '20px',
-                  borderTop: '1px solid var(--border-light)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: '12px'
+                  borderTop: '1px solid var(--border-light)'
                 }}>
-                  <div>
-                    <div style={{ fontSize: '0.78rem', color: 'var(--charcoal-400)', textTransform: 'uppercase' }}>Investasi</div>
-                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
-                      <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--sage-800)' }}>
-                        {service.price}
-                      </span>
-                      {service.originalPrice && (
-                        <span style={{ fontSize: '0.85rem', textDecoration: 'line-through', color: 'var(--charcoal-400)' }}>
-                          {service.originalPrice}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
                   <button 
                     onClick={() => onOpenBooking(service.id)}
-                    className="btn btn-primary btn-sm"
-                    style={{ cursor: 'pointer' }}
+                    className="btn btn-primary"
+                    style={{ width: '100%', cursor: 'pointer', justifyContent: 'center' }}
                   >
-                    <span>Pesan / Daftar</span>
-                    <ArrowRight size={14} />
+                    <Sparkles size={16} />
+                    <span>Konsultasi Sekarang</span>
                   </button>
                 </div>
 
