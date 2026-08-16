@@ -239,7 +239,8 @@ p {
   transition: all var(--transition-normal);
   text-align: center;
   cursor: pointer;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: normal;
 }
 
 .btn-primary {
